@@ -66,22 +66,50 @@ section{position:relative;z-index:10}
 .container{max-width:1100px;margin:0 auto;padding:0 24px}
 
 /* ══════════════════════════════════════════
-   HERO — layout split: texto esquerda | robô direita
+   HERO — vídeo fullscreen + texto esquerda + chat direita
 ══════════════════════════════════════════ */
 #hero{
   min-height:100vh;display:flex;align-items:center;
   padding:120px 64px 80px;
+  position:relative;overflow:hidden;
 }
-@media(max-width:900px){#hero{padding:120px 24px 80px;flex-direction:column}}
+@media(max-width:900px){#hero{padding:120px 24px 80px;flex-direction:column;gap:40px}}
+
+/* Vídeo de fundo */
+.hero-video-bg{
+  position:absolute;inset:0;z-index:1;
+}
+.hero-video-bg video{
+  width:100%;height:100%;object-fit:cover;object-position:center 20%;
+  transform-origin:center center;
+}
+/* Overlay gradiente para legibilidade do texto */
+.hero-video-overlay{
+  position:absolute;inset:0;z-index:2;
+  background:linear-gradient(
+    105deg,
+    rgba(7,7,15,0.93) 0%,
+    rgba(7,7,15,0.82) 38%,
+    rgba(7,7,15,0.45) 65%,
+    rgba(7,7,15,0.15) 100%
+  );
+}
+/* Overlay inferior para transição suave */
+.hero-video-overlay::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:180px;
+  background:linear-gradient(to bottom,transparent,var(--bg));
+}
 
 .hero-left{
   flex:1;max-width:560px;position:relative;z-index:10;
 }
 .hero-right{
-  flex:0 0 480px;display:flex;align-items:center;justify-content:center;
+  flex:0 0 280px;display:flex;align-items:center;justify-content:flex-end;
   position:relative;z-index:10;
 }
-@media(max-width:900px){.hero-right{width:100%;margin-top:60px}}
+@media(max-width:900px){
+  .hero-right{width:100%;justify-content:center;flex:none}
+}
 
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
@@ -134,42 +162,11 @@ section{position:relative;z-index:10}
 .btn-hero-ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}
 
 /* ══════════════════════════════════════════
-   ROBOT + WHATSAPP ANIMATION
+   WHATSAPP CHAT FLUTUANTE
 ══════════════════════════════════════════ */
-.robot-scene{
-  position:relative;width:420px;height:480px;
-}
-@media(max-width:600px){.robot-scene{width:320px;height:380px}}
-
-/* Robot SVG container */
-.robot-wrap{
-  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
-  width:200px;
-  animation:robotFloat 3.5s ease-in-out infinite;
-  filter:drop-shadow(0 0 40px rgba(139,92,246,.5));
-}
-@keyframes robotFloat{
-  0%,100%{transform:translateX(-50%) translateY(0)}
-  50%{transform:translateX(-50%) translateY(-16px)}
-}
-
-/* Aura glow behind robot */
-.robot-aura{
-  position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
-  width:220px;height:60px;
-  background:radial-gradient(ellipse,rgba(139,92,246,.45) 0%,transparent 70%);
-  filter:blur(16px);
-  animation:auraBreath 3.5s ease-in-out infinite;
-}
-@keyframes auraBreath{
-  0%,100%{opacity:.6;transform:translateX(-50%) scaleX(1)}
-  50%{opacity:1;transform:translateX(-50%) scaleX(1.2)}
-}
-
-/* WhatsApp chat bubble from robot */
 .wa-chat{
-  position:absolute;top:0;right:-20px;
-  width:230px;
+  width:250px;
+  @media(max-width:500px){width:100%;max-width:300px}
   background:#111828;
   border:1px solid rgba(139,92,246,.25);
   border-radius:18px 18px 18px 4px;
@@ -237,42 +234,6 @@ section{position:relative;z-index:10}
 .td{width:5px;height:5px;background:var(--m);border-radius:50%;animation:td 1.2s infinite}
 .td:nth-child(2){animation-delay:.2s}.td:nth-child(3){animation-delay:.4s}
 @keyframes td{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-4px);opacity:1}}
-
-/* Human figure chat bubble on left */
-.human-chat{
-  position:absolute;bottom:120px;left:-40px;
-  width:180px;
-  background:#0d1117;
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:18px 18px 4px 18px;
-  padding:12px 14px;
-  font-size:11px;color:var(--m);line-height:1.55;
-  box-shadow:0 16px 48px rgba(0,0,0,.5);
-  opacity:0;transform:translateY(16px);
-  animation:humanAppear .5s 1.4s ease-out forwards;
-}
-@keyframes humanAppear{to{opacity:1;transform:translateY(0)}}
-.human-chat::after{
-  content:'';position:absolute;bottom:-6px;left:16px;
-  border:6px solid transparent;border-top-color:#0d1117;border-bottom:none;
-}
-
-/* Orbit ring decoration */
-.orbit{
-  position:absolute;top:50%;left:50%;
-  border:1px dashed rgba(139,92,246,.15);border-radius:50%;
-  transform:translate(-50%,-50%);
-  animation:orbitSpin 20s linear infinite;
-}
-.orbit1{width:320px;height:320px}
-.orbit2{width:420px;height:420px;animation-direction:reverse;animation-duration:28s;border-style:dotted}
-@keyframes orbitSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
-
-/* Orbit dots */
-.orbit-dot{
-  position:absolute;width:8px;height:8px;border-radius:50%;
-  background:var(--p);box-shadow:0 0 12px var(--p);
-}
 
 /* scroll hint */
 .scroll-hint{
@@ -422,6 +383,15 @@ footer p{font-size:12px;color:var(--m)}
      HERO
 ══════════════════════════════════════════ -->
 <section id="hero">
+
+  <!-- Vídeo de fundo -->
+  <div class="hero-video-bg">
+    <video id="heroVideo" autoplay muted loop playsinline>
+      <source src="hero.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-video-overlay"></div>
+
   <div class="hero-left">
     <div class="hero-eyebrow">
       <span style="width:7px;height:7px;background:var(--p);border-radius:50%;animation:waPulse 1.5s infinite"></span>
@@ -449,165 +419,33 @@ footer p{font-size:12px;color:var(--m)}
   </div>
 
   <div class="hero-right">
-    <div class="robot-scene">
-
-      <!-- Orbit rings decorativos -->
-      <div class="orbit orbit1"></div>
-      <div class="orbit orbit2"></div>
-
-      <!-- Aura glow -->
-      <div class="robot-aura"></div>
-
-      <!-- Balão humano (esquerda) -->
-      <div class="human-chat">
-        <strong style="color:var(--t);display:block;margin-bottom:4px">👤 Cliente</strong>
-        Oi! Vocês fazem harmonização? Qual o valor? 🙏
-        <div style="font-size:9px;opacity:.35;margin-top:4px;text-align:right">23:07</div>
-      </div>
-
-      <!-- Robô SVG animado -->
-      <div class="robot-wrap" id="robotWrap">
-        <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg" style="width:100%">
-          <defs>
-            <radialGradient id="bodyGrad" cx="50%" cy="40%" r="60%">
-              <stop offset="0%" stop-color="#7c3aed"/>
-              <stop offset="100%" stop-color="#3b0764"/>
-            </radialGradient>
-            <radialGradient id="headGrad" cx="50%" cy="35%" r="60%">
-              <stop offset="0%" stop-color="#8b5cf6"/>
-              <stop offset="100%" stop-color="#4c1d95"/>
-            </radialGradient>
-            <filter id="glow">
-              <feGaussianBlur stdDeviation="3" result="blur"/>
-              <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-            </filter>
-            <linearGradient id="eyeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#c4b5fd"/>
-              <stop offset="100%" stop-color="#e879f9"/>
-            </linearGradient>
-          </defs>
-
-          <!-- Antena -->
-          <line x1="100" y1="20" x2="100" y2="42" stroke="#6d28d9" stroke-width="3" stroke-linecap="round"/>
-          <circle cx="100" cy="14" r="7" fill="#8b5cf6" filter="url(#glow)">
-            <animate attributeName="opacity" values="1;0.4;1" dur="1.8s" repeatCount="indefinite"/>
-            <animate attributeName="r" values="7;9;7" dur="1.8s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="100" cy="14" r="3" fill="#e879f9"/>
-
-          <!-- Cabeça -->
-          <rect x="58" y="42" width="84" height="72" rx="22" fill="url(#headGrad)" stroke="#6d28d9" stroke-width="1.5"/>
-
-          <!-- Olhos -->
-          <rect x="70" y="60" width="22" height="14" rx="7" fill="url(#eyeGrad)" filter="url(#glow)">
-            <animate attributeName="height" values="14;3;14" dur="3.5s" begin="0.5s" repeatCount="indefinite"/>
-          </rect>
-          <rect x="108" y="60" width="22" height="14" rx="7" fill="url(#eyeGrad)" filter="url(#glow)">
-            <animate attributeName="height" values="14;3;14" dur="3.5s" begin="0.5s" repeatCount="indefinite"/>
-          </rect>
-
-          <!-- Scan line nos olhos -->
-          <rect x="70" y="60" width="22" height="3" rx="1.5" fill="#e879f9" opacity="0.6">
-            <animate attributeName="y" values="60;74;60" dur="1.5s" repeatCount="indefinite"/>
-          </rect>
-          <rect x="108" y="60" width="22" height="3" rx="1.5" fill="#e879f9" opacity="0.6">
-            <animate attributeName="y" values="60;74;60" dur="1.5s" repeatCount="indefinite"/>
-          </rect>
-
-          <!-- Boca / painel -->
-          <rect x="76" y="90" width="48" height="12" rx="6" fill="#1a0840" stroke="#6d28d9" stroke-width="1"/>
-          <rect x="79" y="93" width="8" height="6" rx="3" fill="#25d366">
-            <animate attributeName="opacity" values="1;0.2;1" dur=".8s" repeatCount="indefinite"/>
-          </rect>
-          <rect x="91" y="93" width="8" height="6" rx="3" fill="#8b5cf6">
-            <animate attributeName="opacity" values="1;0.2;1" dur=".8s" begin=".2s" repeatCount="indefinite"/>
-          </rect>
-          <rect x="103" y="93" width="8" height="6" rx="3" fill="#e879f9">
-            <animate attributeName="opacity" values="1;0.2;1" dur=".8s" begin=".4s" repeatCount="indefinite"/>
-          </rect>
-          <rect x="115" y="93" width="6" height="6" rx="3" fill="#c4b5fd">
-            <animate attributeName="opacity" values="1;0.2;1" dur=".8s" begin=".6s" repeatCount="indefinite"/>
-          </rect>
-
-          <!-- Pescoço -->
-          <rect x="88" y="112" width="24" height="14" rx="6" fill="#4c1d95"/>
-
-          <!-- Corpo -->
-          <rect x="46" y="124" width="108" height="90" rx="24" fill="url(#bodyGrad)" stroke="#5b21b6" stroke-width="1.5"/>
-
-          <!-- Painel peito -->
-          <rect x="62" y="140" width="76" height="52" rx="12" fill="#1a0840" stroke="#6d28d9" stroke-width="1" opacity="0.9"/>
-
-          <!-- WhatsApp icon no peito -->
-          <circle cx="100" cy="166" r="18" fill="#075e54">
-            <animate attributeName="r" values="18;20;18" dur="2s" repeatCount="indefinite"/>
-          </circle>
-          <text x="100" y="172" text-anchor="middle" font-size="18" fill="#25d366">💬</text>
-
-          <!-- LED indicators no corpo -->
-          <circle cx="68" cy="148" r="4" fill="#25d366" filter="url(#glow)">
-            <animate attributeName="opacity" values="1;0.3;1" dur="1.2s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="80" cy="148" r="4" fill="#8b5cf6" filter="url(#glow)">
-            <animate attributeName="opacity" values="1;0.3;1" dur="1.2s" begin=".3s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="68" cy="184" r="3" fill="#e879f9">
-            <animate attributeName="opacity" values="1;0.2;1" dur="1.5s" repeatCount="indefinite"/>
-          </circle>
-
-          <!-- Braço esquerdo -->
-          <rect x="16" y="128" width="32" height="72" rx="16" fill="url(#bodyGrad)" stroke="#5b21b6" stroke-width="1.5">
-            <animateTransform attributeName="transform" type="rotate" values="0 32 164;12 32 164;0 32 164" dur="2.5s" repeatCount="indefinite"/>
-          </rect>
-          <!-- Mão esquerda -->
-          <circle cx="32" cy="208" r="12" fill="#4c1d95" stroke="#6d28d9" stroke-width="1"/>
-
-          <!-- Braço direito (acenando/digitando) -->
-          <rect x="152" y="128" width="32" height="72" rx="16" fill="url(#bodyGrad)" stroke="#5b21b6" stroke-width="1.5">
-            <animateTransform attributeName="transform" type="rotate" values="0 168 164;-15 168 164;0 168 164" dur="1.8s" repeatCount="indefinite"/>
-          </rect>
-          <!-- Mão direita -->
-          <circle cx="168" cy="208" r="12" fill="#4c1d95" stroke="#6d28d9" stroke-width="1"/>
-
-          <!-- Pernas -->
-          <rect x="68" y="210" width="28" height="44" rx="14" fill="#3b0764" stroke="#4c1d95" stroke-width="1"/>
-          <rect x="104" y="210" width="28" height="44" rx="14" fill="#3b0764" stroke="#4c1d95" stroke-width="1"/>
-
-          <!-- Pés -->
-          <ellipse cx="82" cy="252" rx="18" ry="8" fill="#2e0a63"/>
-          <ellipse cx="118" cy="252" rx="18" ry="8" fill="#2e0a63"/>
-        </svg>
-      </div>
-
-      <!-- WhatsApp chat bubble (direita, acima) -->
-      <div class="wa-chat">
-        <div class="wa-top">
-          <div class="wa-av">🤖</div>
-          <div>
-            <div class="wa-name">Atendente IA · Zênite</div>
-            <div class="wa-online">online agora</div>
-          </div>
-        </div>
-        <div class="wa-body">
-          <div class="wa-msg-human" id="wm1">
-            Oi! Fazem harmonização?<span class="wa-time">23:07</span>
-          </div>
-          <div class="wa-typing" id="wt1"><div class="td"></div><div class="td"></div><div class="td"></div></div>
-          <div class="wa-msg-bot" id="wm2">
-            <div class="wa-tag">⚡ IA Zênite</div>
-            Olá! 😊 Sim! A partir de R$1.200. Quer avaliação grátis essa semana?<span class="wa-time">23:07</span><span class="wa-check">✓✓</span>
-          </div>
-          <div class="wa-msg-human" id="wm3">
-            Sim! Quinta à tarde 🙏<span class="wa-time">23:08</span>
-          </div>
-          <div class="wa-typing" id="wt2"><div class="td"></div><div class="td"></div><div class="td"></div></div>
-          <div class="wa-msg-bot" id="wm4">
-            <div class="wa-tag">⚡ IA Zênite</div>
-            ✅ Quinta 15h confirmado! Vou lembrar você na véspera 🌟<span class="wa-time">23:08</span><span class="wa-check">✓✓</span>
-          </div>
+    <!-- WhatsApp chat animado -->
+    <div class="wa-chat">
+      <div class="wa-top">
+        <div class="wa-av">🤖</div>
+        <div>
+          <div class="wa-name">Atendente IA · Zênite</div>
+          <div class="wa-online">online agora</div>
         </div>
       </div>
-
+      <div class="wa-body">
+        <div class="wa-msg-human" id="wm1">
+          Oi! Fazem harmonização?<span class="wa-time">23:07</span>
+        </div>
+        <div class="wa-typing" id="wt1"><div class="td"></div><div class="td"></div><div class="td"></div></div>
+        <div class="wa-msg-bot" id="wm2">
+          <div class="wa-tag">⚡ IA Zênite</div>
+          Olá! 😊 Sim! A partir de R$1.200. Quer avaliação grátis essa semana?<span class="wa-time">23:07</span><span class="wa-check">✓✓</span>
+        </div>
+        <div class="wa-msg-human" id="wm3">
+          Sim! Quinta à tarde 🙏<span class="wa-time">23:08</span>
+        </div>
+        <div class="wa-typing" id="wt2"><div class="td"></div><div class="td"></div><div class="td"></div></div>
+        <div class="wa-msg-bot" id="wm4">
+          <div class="wa-tag">⚡ IA Zênite</div>
+          ✅ Quinta 15h confirmado! Vou lembrar você na véspera 🌟<span class="wa-time">23:08</span><span class="wa-check">✓✓</span>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -654,20 +492,24 @@ footer p{font-size:12px;color:var(--m)}
             <p class="card-text">Responde em menos de 30 segundos, qualifica o lead, apresenta seus serviços com sua linguagem e fecha o agendamento — tudo isso às 23h de um domingo.</p>
           </div>
           <div class="chat-demo">
-            <div class="chat-top">
-              <div class="chat-av">🤖</div>
-              <div>
-                <div class="chat-name">Atendente IA — Zênite</div>
-                <div class="chat-status">● online agora</div>
+            <div style="padding:20px 20px 8px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--m)">Resultado em tempo real</div>
+            <div style="padding:0 20px 20px;display:flex;flex-direction:column;gap:14px">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:rgba(37,211,102,.06);border:1px solid rgba(37,211,102,.15);border-radius:12px">
+                <div><div style="font-size:13px;font-weight:700">Leads respondidos hoje</div><div style="font-size:11px;color:var(--m);margin-top:2px">Em menos de 30 segundos</div></div>
+                <div style="font-size:28px;font-weight:900;color:var(--g)">47</div>
               </div>
-            </div>
-            <div class="chat-body" id="chat1">
-              <div class="bbl bbl-in" id="c1">Oi! Vocês fazem harmonização? Quanto custa? <span class="t">23:02</span></div>
-              <div class="bbl-typing" id="ct1"><div class="td"></div><div class="td"></div><div class="td"></div></div>
-              <div class="bbl bbl-ai" id="c2"><div class="tag">⚡ IA Zênite</div>Olá! 😊 Sim! Pacotes a partir de R$1.200. Gostaria de uma avaliação gratuita essa semana? <span class="t">23:02</span></div>
-              <div class="bbl bbl-in" id="c3">Sim, tenho quinta à tarde livre <span class="t">23:03</span></div>
-              <div class="bbl-typing" id="ct2"><div class="td"></div><div class="td"></div><div class="td"></div></div>
-              <div class="bbl bbl-ai" id="c4"><div class="tag">⚡ IA Zênite</div>✅ Perfeito! Quinta às 15h confirmado. Vou te lembrar na véspera. Até lá! 🌟 <span class="t">23:03</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.15);border-radius:12px">
+                <div><div style="font-size:13px;font-weight:700">Agendamentos fechados</div><div style="font-size:11px;color:var(--m);margin-top:2px">Sem intervenção humana</div></div>
+                <div style="font-size:28px;font-weight:900;color:var(--pl)">12</div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:rgba(232,121,249,.06);border:1px solid rgba(232,121,249,.15);border-radius:12px">
+                <div><div style="font-size:13px;font-weight:700">Taxa de no-show</div><div style="font-size:11px;color:var(--m);margin-top:2px">Antes: 35% → Agora</div></div>
+                <div style="font-size:28px;font-weight:900;color:#e879f9">8%</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;padding-top:4px">
+                <div style="width:8px;height:8px;border-radius:50%;background:var(--g);animation:waPulse 1.5s infinite;flex-shrink:0"></div>
+                <div style="font-size:11px;color:var(--m)">Sistema respondendo agora — <strong style="color:var(--t)">há 4 segundos</strong></div>
+              </div>
             </div>
           </div>
         </div>
@@ -887,28 +729,7 @@ gsap.to('.mission-text',{scrollTrigger:{trigger:'#mission',start:'top 70%'},opac
 gsap.to('.mission-sub',{scrollTrigger:{trigger:'#mission',start:'top 65%'},opacity:1,duration:.8,delay:.2});
 gsap.to('.cta-pair',{scrollTrigger:{trigger:'#mission',start:'top 60%'},opacity:1,duration:.8,delay:.4});
 
-// ── CHAT DEMO (card) ──
-const chatSeq=[
-  {id:'c1',delay:400},{id:'ct1',delay:900,typing:true,dur:800},
-  {id:'c2',delay:1700},{id:'c3',delay:2900},
-  {id:'ct2',delay:3400,typing:true,dur:700},{id:'c4',delay:4100},
-];
-function runChat(){
-  chatSeq.forEach(s=>{
-    setTimeout(()=>{
-      const el=document.getElementById(s.id);if(!el)return;
-      el.classList.add('show');
-      if(s.typing)setTimeout(()=>el.classList.remove('show'),s.dur);
-    },s.delay);
-  });
-  setTimeout(()=>{
-    chatSeq.forEach(s=>{const el=document.getElementById(s.id);if(el)el.classList.remove('show')});
-    setTimeout(runChat,600);
-  },7000);
-}
-runChat();
-
-// ── HERO WHATSAPP ANIMATION (robô) ──
+// ── HERO WHATSAPP ANIMATION ──
 const heroSeq=[
   {id:'wm1',delay:600},
   {id:'wt1',delay:1200,typing:true,dur:900},
@@ -931,6 +752,17 @@ function runHeroChat(){
   },8000);
 }
 runHeroChat();
+
+// ── VÍDEO PARALLAX NO SCROLL ──
+gsap.to('#heroVideo',{
+  scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true},
+  scale:1.12,y:'10%',ease:'none'
+});
+// Fade out hero content ao scrollar
+gsap.to('.hero-left, .hero-right',{
+  scrollTrigger:{trigger:'#hero',start:'20% top',end:'60% top',scrub:true},
+  opacity:0,y:-40,ease:'none'
+});
 </script>
 </body>
 </html>
