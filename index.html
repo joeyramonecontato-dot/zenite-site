@@ -73,7 +73,15 @@ section{position:relative;z-index:10}
   padding:120px 64px 80px;
   position:relative;overflow:hidden;
 }
-@media(max-width:900px){#hero{padding:120px 24px 80px;flex-direction:column;gap:40px}}
+@media(max-width:900px){
+  #hero{padding:120px 24px 80px;flex-direction:column;gap:40px}
+  .hero-video-overlay{
+    background:linear-gradient(180deg,
+      rgba(7,7,15,.90) 0%,
+      rgba(7,7,15,.72) 50%,
+      rgba(7,7,15,.90) 100%);
+  }
+}
 
 /* Vídeo de fundo */
 .hero-video-bg{
@@ -166,7 +174,6 @@ section{position:relative;z-index:10}
 ══════════════════════════════════════════ */
 .wa-chat{
   width:250px;
-  @media(max-width:500px){width:100%;max-width:300px}
   background:#111828;
   border:1px solid rgba(139,92,246,.25);
   border-radius:18px 18px 18px 4px;
@@ -358,6 +365,83 @@ footer p{font-size:12px;color:var(--m)}
 .float-wa:hover{transform:scale(1.1)}
 @keyframes waPulse{0%,100%{box-shadow:0 8px 30px rgba(37,211,102,.5)}50%{box-shadow:0 8px 50px rgba(37,211,102,.9)}}
 @media(max-width:640px){.float-wa{bottom:20px;right:20px;width:48px;height:48px;font-size:20px}footer{flex-direction:column;text-align:center}}
+
+/* ══════════════════════════════════════════
+   TABLET — max-width: 768px
+══════════════════════════════════════════ */
+@media(max-width:768px){
+  #manifesto{padding:90px 20px}
+  #what{padding:80px 20px}
+  .what-card{padding:28px}
+  #how{padding:80px 20px}
+  .how-visual{padding:24px}
+  #numbers{padding:80px 20px}
+  .num-card{padding:36px 20px}
+  .num-val{font-size:44px}
+  #mission{padding:100px 20px}
+  .divider{margin:0 20px}
+  .sec-header{margin-bottom:44px}
+}
+
+/* ══════════════════════════════════════════
+   MOBILE — max-width: 480px
+══════════════════════════════════════════ */
+@media(max-width:480px){
+  /* Nav */
+  nav{padding:16px 20px}
+  nav.scrolled{padding:12px 20px}
+  .btn-nav{font-size:12px;padding:8px 16px}
+
+  /* Hero */
+  #hero{padding:96px 20px 56px;gap:28px;align-items:flex-start}
+  .hero-video-overlay{
+    background:linear-gradient(180deg,
+      rgba(7,7,15,.92) 0%,
+      rgba(7,7,15,.78) 55%,
+      rgba(7,7,15,.92) 100%) !important;
+  }
+  .hero-eyebrow{font-size:9px;padding:6px 12px;margin-bottom:18px;letter-spacing:1px}
+  .hero-title{letter-spacing:-1px;margin-bottom:14px}
+  .hero-sub{font-size:14px;line-height:1.65;margin-bottom:24px;max-width:100%}
+  .hero-ctas{flex-direction:column;gap:10px}
+  .btn-hero-primary,.btn-hero-ghost{
+    font-size:14px;padding:14px 24px;
+    width:100%;justify-content:center;
+  }
+
+  /* Hero right / wa-chat */
+  .hero-right{width:100%;justify-content:center}
+  .wa-chat{width:100%;max-width:320px}
+
+  /* Scroll hint */
+  .scroll-hint{display:none}
+
+  /* Sections */
+  #manifesto{padding:70px 20px}
+  .manifesto-sub{font-size:15px}
+  #what{padding:70px 20px}
+  .what-card{padding:22px}
+  .big-inner{gap:20px}
+  #how{padding:70px 20px}
+  .how-grid{margin-top:40px;gap:32px}
+  .how-visual{padding:20px;transform:none}
+  .step-item{gap:16px}
+  #numbers{padding:70px 20px}
+  .numbers-grid{margin-top:40px;border-radius:16px}
+  .num-card{padding:28px 16px}
+  .num-val{font-size:38px}
+  .num-label{font-size:12px}
+  #mission{padding:80px 20px}
+  .mission-sub{font-size:16px}
+  .btn-wa,.btn-ghost{
+    width:100%;justify-content:center;
+    font-size:14px;padding:16px 24px;
+  }
+  .cta-pair{flex-direction:column;align-items:stretch}
+
+  /* Footer */
+  footer{padding:36px 20px}
+}
 </style>
 </head>
 <body>
