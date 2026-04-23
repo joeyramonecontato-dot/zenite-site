@@ -3,32 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zênite — Tecnologia que liberta</title>
-<meta name="description" content="Eliminamos o trabalho repetitivo para que você possa focar no que só você pode fazer. Automação inteligente para negócios que não param.">
+<title>Zênite — Agência Digital que Automatiza</title>
+<meta name="description" content="Bots de WhatsApp, sites, conteúdo e automação para negócios em Florianópolis. Zênite — tecnologia que liberta.">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <style>
-:root {
-  --p:   #8b5cf6;
-  --pl:  #c4b5fd;
-  --pd:  #5b21b6;
-  --pdd: #3b0764;
-  --bg:  #07070f;
-  --bg2: #0c0c1a;
-  --bg3: #111128;
-  --t:   #f0f0ff;
-  --m:   #6b6b9a;
-  --g:   #25d366;
+:root{
+  --p:#8b5cf6;--pl:#c4b5fd;--pd:#5b21b6;--pdd:#3b0764;
+  --bg:#07070f;--bg2:#0c0c1a;--bg3:#111128;
+  --t:#f0f0ff;--m:#6b6b9a;--g:#25d366;
 }
-
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--t);overflow-x:hidden}
 ::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-thumb{background:var(--p);border-radius:2px}
 
-/* ── CANVAS 3D ── */
+/* ── CANVAS 3D FUNDO ── */
 #bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 
 /* ── NAV ── */
@@ -37,13 +29,11 @@ nav{
   display:flex;align-items:center;justify-content:space-between;
   padding:24px 64px;
   border-bottom:1px solid rgba(139,92,246,0);
-  transition:border-color .4s, background .4s, padding .4s;
+  transition:border-color .4s,background .4s,padding .4s;
 }
 nav.scrolled{
-  background:rgba(7,7,15,0.85);
-  backdrop-filter:blur(20px);
-  border-color:rgba(139,92,246,0.12);
-  padding:16px 64px;
+  background:rgba(7,7,15,0.9);backdrop-filter:blur(24px);
+  border-color:rgba(139,92,246,.12);padding:16px 64px;
 }
 .logo{
   display:flex;align-items:center;gap:10px;
@@ -58,85 +48,74 @@ nav.scrolled{
   font-size:16px;-webkit-text-fill-color:initial;
 }
 .nav-links{display:flex;gap:32px;align-items:center}
-.nav-links a{
-  color:var(--m);font-size:14px;text-decoration:none;font-weight:500;
-  transition:color .2s;
-}
+.nav-links a{color:var(--m);font-size:14px;text-decoration:none;font-weight:500;transition:color .2s}
 .nav-links a:hover{color:var(--t)}
 .btn-nav{
   background:linear-gradient(135deg,var(--pd),var(--p));
   color:#fff;font-weight:700;font-size:13px;
   padding:10px 22px;border-radius:50px;text-decoration:none;
-  border:1px solid rgba(139,92,246,0.5);
+  border:1px solid rgba(139,92,246,.5);
   box-shadow:0 0 20px rgba(139,92,246,.3);
   transition:transform .2s,box-shadow .2s;
 }
 .btn-nav:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(139,92,246,.5)}
+@media(max-width:768px){nav{padding:20px 24px}nav.scrolled{padding:14px 24px}.nav-links{display:none}}
 
-@media(max-width:768px){
-  nav{padding:20px 24px}
-  nav.scrolled{padding:14px 24px}
-  .nav-links{display:none}
-}
-
-/* ── SECTIONS BASE ── */
+/* ── SECTIONS ── */
 section{position:relative;z-index:10}
 .container{max-width:1100px;margin:0 auto;padding:0 24px}
 
-/* ── HERO ── */
+/* ══════════════════════════════════════════
+   HERO — layout split: texto esquerda | robô direita
+══════════════════════════════════════════ */
 #hero{
-  min-height:100vh;
-  display:flex;align-items:center;justify-content:center;
-  text-align:center;padding:140px 24px 100px;
+  min-height:100vh;display:flex;align-items:center;
+  padding:120px 64px 80px;
 }
+@media(max-width:900px){#hero{padding:120px 24px 80px;flex-direction:column}}
 
-.hero-inner{max-width:860px;position:relative;z-index:10}
+.hero-left{
+  flex:1;max-width:560px;position:relative;z-index:10;
+}
+.hero-right{
+  flex:0 0 480px;display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:10;
+}
+@media(max-width:900px){.hero-right{width:100%;margin-top:60px}}
 
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
-  background:rgba(139,92,246,.08);
-  border:1px solid rgba(139,92,246,.2);
+  background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);
   border-radius:50px;padding:8px 20px;
-  font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-  color:var(--pl);margin-bottom:36px;
+  font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--pl);margin-bottom:32px;
   opacity:0;transform:translateY(20px);
 }
-
 .hero-title{
-  font-size:clamp(42px,7vw,88px);
-  font-weight:900;line-height:1.02;
-  letter-spacing:-2px;margin-bottom:28px;
+  font-size:clamp(38px,5.5vw,76px);font-weight:900;line-height:1.04;
+  letter-spacing:-2px;margin-bottom:24px;
   opacity:0;transform:translateY(30px);
 }
-
-.hero-title .line{display:block;overflow:hidden}
-.hero-title .word{display:inline-block}
-
 .hero-title .g{
   background:linear-gradient(135deg,var(--p) 0%,var(--pl) 50%,#e879f9 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
 }
-
 .hero-sub{
-  font-size:clamp(16px,2vw,20px);color:var(--m);
-  line-height:1.7;max-width:580px;margin:0 auto 48px;
+  font-size:17px;color:var(--m);line-height:1.75;max-width:480px;margin-bottom:40px;
   opacity:0;transform:translateY(20px);
 }
-
 .hero-ctas{
-  display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
+  display:flex;gap:14px;flex-wrap:wrap;
   opacity:0;transform:translateY(20px);
 }
-
 .btn-hero-primary{
   display:inline-flex;align-items:center;gap:10px;
   background:linear-gradient(135deg,var(--pd),var(--p));
-  color:#fff;font-weight:800;font-size:16px;
-  padding:18px 36px;border-radius:50px;text-decoration:none;
+  color:#fff;font-weight:800;font-size:15px;
+  padding:16px 32px;border-radius:50px;text-decoration:none;
   border:1px solid rgba(139,92,246,.6);
-  box-shadow:0 0 60px rgba(139,92,246,.4),inset 0 1px 0 rgba(255,255,255,.1);
-  transition:transform .25s,box-shadow .25s;
-  position:relative;overflow:hidden;
+  box-shadow:0 0 50px rgba(139,92,246,.4),inset 0 1px 0 rgba(255,255,255,.1);
+  transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden;
 }
 .btn-hero-primary::before{
   content:'';position:absolute;inset:0;
@@ -144,151 +123,217 @@ section{position:relative;z-index:10}
   transform:translateX(-100%);transition:transform .4s;
 }
 .btn-hero-primary:hover::before{transform:translateX(100%)}
-.btn-hero-primary:hover{transform:translateY(-3px);box-shadow:0 20px 60px rgba(139,92,246,.6),inset 0 1px 0 rgba(255,255,255,.15)}
-
+.btn-hero-primary:hover{transform:translateY(-3px);box-shadow:0 20px 50px rgba(139,92,246,.6)}
 .btn-hero-ghost{
   display:inline-flex;align-items:center;gap:10px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.1);
-  color:var(--t);font-weight:600;font-size:16px;
-  padding:18px 36px;border-radius:50px;text-decoration:none;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+  color:var(--t);font-weight:600;font-size:15px;
+  padding:16px 32px;border-radius:50px;text-decoration:none;
   transition:background .2s,border-color .2s;
 }
 .btn-hero-ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}
 
-/* scroll indicator */
+/* ══════════════════════════════════════════
+   ROBOT + WHATSAPP ANIMATION
+══════════════════════════════════════════ */
+.robot-scene{
+  position:relative;width:420px;height:480px;
+}
+@media(max-width:600px){.robot-scene{width:320px;height:380px}}
+
+/* Robot SVG container */
+.robot-wrap{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:200px;
+  animation:robotFloat 3.5s ease-in-out infinite;
+  filter:drop-shadow(0 0 40px rgba(139,92,246,.5));
+}
+@keyframes robotFloat{
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  50%{transform:translateX(-50%) translateY(-16px)}
+}
+
+/* Aura glow behind robot */
+.robot-aura{
+  position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+  width:220px;height:60px;
+  background:radial-gradient(ellipse,rgba(139,92,246,.45) 0%,transparent 70%);
+  filter:blur(16px);
+  animation:auraBreath 3.5s ease-in-out infinite;
+}
+@keyframes auraBreath{
+  0%,100%{opacity:.6;transform:translateX(-50%) scaleX(1)}
+  50%{opacity:1;transform:translateX(-50%) scaleX(1.2)}
+}
+
+/* WhatsApp chat bubble from robot */
+.wa-chat{
+  position:absolute;top:0;right:-20px;
+  width:230px;
+  background:#111828;
+  border:1px solid rgba(139,92,246,.25);
+  border-radius:18px 18px 18px 4px;
+  overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 0 1px rgba(139,92,246,.1);
+  opacity:0;transform:translateY(20px) scale(.95);
+  animation:chatAppear .6s .8s cubic-bezier(.175,.885,.32,1.275) forwards;
+}
+@keyframes chatAppear{to{opacity:1;transform:translateY(0) scale(1)}}
+
+.wa-top{
+  background:linear-gradient(135deg,#1a1040,#0f0a25);
+  padding:10px 14px;
+  display:flex;align-items:center;gap:9px;
+  border-bottom:1px solid rgba(139,92,246,.12);
+}
+.wa-av{
+  width:34px;height:34px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--pd),var(--p));
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;
+  box-shadow:0 0 12px rgba(139,92,246,.5);
+}
+.wa-name{font-size:12px;font-weight:700;color:var(--t)}
+.wa-online{font-size:10px;color:var(--g);display:flex;align-items:center;gap:4px}
+.wa-online::before{content:'';width:6px;height:6px;background:var(--g);border-radius:50%;display:inline-block;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+.wa-body{padding:12px;display:flex;flex-direction:column;gap:6px;min-height:200px}
+
+/* mensagem humano */
+.wa-msg-human{
+  background:rgba(255,255,255,.06);
+  border-radius:4px 14px 14px 14px;
+  padding:7px 10px;font-size:11px;line-height:1.5;
+  max-width:90%;align-self:flex-start;color:var(--t);
+  opacity:0;transform:translateX(-8px);
+  transition:opacity .35s,transform .35s;
+}
+.wa-msg-human.show{opacity:1;transform:translateX(0)}
+
+/* mensagem robô */
+.wa-msg-bot{
+  background:linear-gradient(135deg,rgba(91,33,182,.3),rgba(59,7,100,.3));
+  border-radius:14px 4px 14px 14px;
+  padding:7px 10px;font-size:11px;line-height:1.5;
+  max-width:90%;align-self:flex-end;color:var(--t);
+  border:1px solid rgba(139,92,246,.2);
+  opacity:0;transform:translateX(8px);
+  transition:opacity .35s,transform .35s;
+}
+.wa-msg-bot.show{opacity:1;transform:translateX(0)}
+
+.wa-tag{font-size:9px;color:var(--pl);font-weight:700;text-transform:uppercase;margin-bottom:2px}
+.wa-time{font-size:9px;opacity:.35;float:right;margin-left:6px;margin-top:2px}
+.wa-check{font-size:9px;color:#34b7f1;margin-left:2px}
+
+/* typing dots */
+.wa-typing{
+  display:flex;gap:3px;align-items:center;padding:8px 10px;
+  background:rgba(255,255,255,.05);border-radius:4px 14px 14px 14px;
+  align-self:flex-start;opacity:0;transition:opacity .25s;width:fit-content;
+}
+.wa-typing.show{opacity:1}
+.td{width:5px;height:5px;background:var(--m);border-radius:50%;animation:td 1.2s infinite}
+.td:nth-child(2){animation-delay:.2s}.td:nth-child(3){animation-delay:.4s}
+@keyframes td{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-4px);opacity:1}}
+
+/* Human figure chat bubble on left */
+.human-chat{
+  position:absolute;bottom:120px;left:-40px;
+  width:180px;
+  background:#0d1117;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px 18px 4px 18px;
+  padding:12px 14px;
+  font-size:11px;color:var(--m);line-height:1.55;
+  box-shadow:0 16px 48px rgba(0,0,0,.5);
+  opacity:0;transform:translateY(16px);
+  animation:humanAppear .5s 1.4s ease-out forwards;
+}
+@keyframes humanAppear{to{opacity:1;transform:translateY(0)}}
+.human-chat::after{
+  content:'';position:absolute;bottom:-6px;left:16px;
+  border:6px solid transparent;border-top-color:#0d1117;border-bottom:none;
+}
+
+/* Orbit ring decoration */
+.orbit{
+  position:absolute;top:50%;left:50%;
+  border:1px dashed rgba(139,92,246,.15);border-radius:50%;
+  transform:translate(-50%,-50%);
+  animation:orbitSpin 20s linear infinite;
+}
+.orbit1{width:320px;height:320px}
+.orbit2{width:420px;height:420px;animation-direction:reverse;animation-duration:28s;border-style:dotted}
+@keyframes orbitSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+/* Orbit dots */
+.orbit-dot{
+  position:absolute;width:8px;height:8px;border-radius:50%;
+  background:var(--p);box-shadow:0 0 12px var(--p);
+}
+
+/* scroll hint */
 .scroll-hint{
   position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:8px;
-  color:var(--m);font-size:11px;letter-spacing:1px;text-transform:uppercase;
-  opacity:0;animation:fadeIn 1s 2s both;
+  color:var(--m);font-size:10px;letter-spacing:1px;text-transform:uppercase;
+  opacity:0;animation:fadeIn 1s 2.5s both;
 }
-.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--p),transparent);animation:scrollDrop 1.5s infinite}
-@keyframes scrollDrop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.scroll-line{width:1px;height:36px;background:linear-gradient(to bottom,var(--p),transparent);animation:scrollDrop 1.5s infinite}
+@keyframes scrollDrop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 @keyframes fadeIn{to{opacity:1}}
 
-/* ── MANIFESTO ── */
-#manifesto{padding:140px 24px}
-
-.manifesto-inner{
-  max-width:900px;margin:0 auto;text-align:center;
-}
-
-.manifesto-label{
-  font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
-  color:var(--p);margin-bottom:24px;opacity:0;
-}
-
-.manifesto-text{
-  font-size:clamp(24px,3.5vw,42px);
-  font-weight:800;line-height:1.25;color:var(--t);
-  opacity:0;
-}
-
-.manifesto-text em{
-  font-style:normal;
-  background:linear-gradient(135deg,var(--p),var(--pl));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-}
-
-.manifesto-sub{
-  margin-top:32px;font-size:17px;color:var(--m);
-  line-height:1.8;max-width:640px;margin-left:auto;margin-right:auto;
-  opacity:0;
-}
-
 /* ── DIVIDER ── */
-.divider{
-  height:1px;
-  background:linear-gradient(90deg,transparent,rgba(139,92,246,.2),transparent);
-  margin:0 40px;
-}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(139,92,246,.2),transparent);margin:0 40px}
+
+/* ── MANIFESTO ── */
+#manifesto{padding:140px 24px;text-align:center}
+.manifesto-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--p);margin-bottom:24px;opacity:0}
+.manifesto-text{font-size:clamp(24px,3.5vw,42px);font-weight:800;line-height:1.25;opacity:0}
+.manifesto-text em{font-style:normal;background:linear-gradient(135deg,var(--p),var(--pl));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.manifesto-sub{margin-top:28px;font-size:17px;color:var(--m);line-height:1.8;max-width:640px;margin-left:auto;margin-right:auto;opacity:0}
+
+/* ── SEC HEADER ── */
+.sec-header{margin-bottom:64px}
+.sec-tag{display:inline-block;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);color:var(--pl);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;border-radius:50px;margin-bottom:16px}
+.sec-title{font-size:clamp(28px,4vw,46px);font-weight:800;line-height:1.12;margin-bottom:14px}
+.sec-sub{color:var(--m);font-size:16px;line-height:1.7;max-width:520px}
 
 /* ── WHAT WE DO ── */
 #what{padding:120px 24px}
-
-.sec-header{margin-bottom:72px}
-.sec-tag{
-  display:inline-block;
-  background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);
-  color:var(--pl);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  padding:6px 16px;border-radius:50px;margin-bottom:16px;
-}
-.sec-title{font-size:clamp(28px,4vw,46px);font-weight:800;line-height:1.12;margin-bottom:16px}
-.sec-sub{color:var(--m);font-size:16px;line-height:1.7;max-width:520px}
-
-.what-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  grid-template-rows:auto auto;
-  gap:20px;
-}
-
+.what-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:20px}
 @media(max-width:768px){.what-grid{grid-template-columns:1fr}}
-
 .what-card{
   background:var(--bg2);border:1px solid rgba(139,92,246,.1);
   border-radius:24px;padding:40px;position:relative;overflow:hidden;
   opacity:0;transform:translateY(30px);
-  transition:border-color .3s;
-  cursor:default;
+  transition:border-color .3s;cursor:default;
 }
 .what-card:hover{border-color:rgba(139,92,246,.35)}
 .what-card.big{grid-column:1/3}
 @media(max-width:768px){.what-card.big{grid-column:auto}}
-
-.what-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--p),transparent);
-  opacity:0;transition:opacity .3s;
-}
+.what-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--p),transparent);opacity:0;transition:opacity .3s}
 .what-card:hover::before{opacity:1}
-
-.card-glow{
-  position:absolute;width:200px;height:200px;border-radius:50%;
-  filter:blur(60px);pointer-events:none;
-  background:rgba(139,92,246,.12);
-  top:-50px;right:-50px;
-}
-
-.card-icon{
-  width:52px;height:52px;border-radius:14px;
-  background:linear-gradient(135deg,var(--pdd),var(--pd));
-  border:1px solid rgba(139,92,246,.3);
-  display:flex;align-items:center;justify-content:center;
-  font-size:22px;margin-bottom:24px;
-}
-
+.card-glow{position:absolute;width:200px;height:200px;border-radius:50%;filter:blur(60px);pointer-events:none;background:rgba(139,92,246,.12);top:-50px;right:-50px}
+.card-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--pdd),var(--pd));border:1px solid rgba(139,92,246,.3);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:24px}
 .card-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p);margin-bottom:10px}
 .card-title{font-size:22px;font-weight:800;margin-bottom:12px;line-height:1.2}
 .card-text{font-size:14px;color:var(--m);line-height:1.7}
 
-/* big card inner layout */
+/* big card inner */
 .big-inner{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
 @media(max-width:600px){.big-inner{grid-template-columns:1fr}}
 
-.chat-demo{
-  background:var(--bg3);border-radius:16px;border:1px solid rgba(139,92,246,.15);
-  overflow:hidden;
-}
-.chat-top{
-  background:rgba(139,92,246,.08);padding:12px 16px;
-  display:flex;align-items:center;gap:10px;
-  border-bottom:1px solid rgba(139,92,246,.1);
-}
-.chat-av{
-  width:32px;height:32px;border-radius:50%;
-  background:linear-gradient(135deg,var(--pd),var(--p));
-  display:flex;align-items:center;justify-content:center;font-size:14px;
-}
+/* WhatsApp demo inside card */
+.chat-demo{background:var(--bg3);border-radius:16px;border:1px solid rgba(139,92,246,.15);overflow:hidden}
+.chat-top{background:rgba(139,92,246,.08);padding:12px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(139,92,246,.1)}
+.chat-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--pd),var(--p));display:flex;align-items:center;justify-content:center;font-size:14px}
 .chat-name{font-size:13px;font-weight:700}
 .chat-status{font-size:10px;color:var(--g)}
 .chat-body{padding:16px;display:flex;flex-direction:column;gap:8px;min-height:180px}
-
-.bbl{
-  max-width:88%;padding:9px 13px;border-radius:10px;font-size:12px;line-height:1.5;
-  opacity:0;transform:translateY(4px);transition:opacity .4s,transform .4s;
-}
+.bbl{max-width:88%;padding:9px 13px;border-radius:10px;font-size:12px;line-height:1.5;opacity:0;transform:translateY(4px);transition:opacity .4s,transform .4s}
 .bbl.show{opacity:1;transform:translateY(0)}
 .bbl-in{background:rgba(255,255,255,.06);align-self:flex-start;border-radius:3px 10px 10px 10px}
 .bbl-ai{background:rgba(91,33,182,.25);align-self:flex-start;border-radius:3px 10px 10px 10px;border-left:2px solid var(--p)}
@@ -296,176 +341,66 @@ section{position:relative;z-index:10}
 .bbl .t{font-size:9px;opacity:.3;float:right;margin-left:6px;margin-top:2px}
 .bbl-typing{display:flex;gap:3px;align-items:center;padding:10px 13px;background:rgba(255,255,255,.06);border-radius:3px 10px 10px 10px;align-self:flex-start;opacity:0;transition:opacity .3s;width:fit-content}
 .bbl-typing.show{opacity:1}
-.td{width:5px;height:5px;background:var(--m);border-radius:50%;animation:td 1.2s infinite}
-.td:nth-child(2){animation-delay:.2s}.td:nth-child(3){animation-delay:.4s}
-@keyframes td{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-3px);opacity:1}}
 
 /* ── HOW ── */
 #how{padding:120px 24px;background:var(--bg2)}
-
-.how-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:80px;align-items:center;margin-top:72px;
-}
+.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:72px}
 @media(max-width:768px){.how-grid{grid-template-columns:1fr;gap:48px}}
-
 .steps-list{display:flex;flex-direction:column;gap:0;position:relative}
-.steps-list::before{
-  content:'';position:absolute;left:20px;top:24px;bottom:24px;width:1px;
-  background:linear-gradient(to bottom,var(--p),rgba(139,92,246,.1));
-}
-
-.step-item{
-  display:flex;gap:24px;padding-bottom:40px;
-  opacity:0;transform:translateX(-16px);
-}
+.steps-list::before{content:'';position:absolute;left:20px;top:24px;bottom:24px;width:1px;background:linear-gradient(to bottom,var(--p),rgba(139,92,246,.1))}
+.step-item{display:flex;gap:24px;padding-bottom:40px;opacity:0;transform:translateX(-16px)}
 .step-item:last-child{padding-bottom:0}
-
-.step-circle{
-  width:42px;height:42px;flex-shrink:0;border-radius:50%;
-  background:linear-gradient(135deg,var(--pd),var(--p));
-  display:flex;align-items:center;justify-content:center;
-  font-size:14px;font-weight:900;color:#fff;
-  box-shadow:0 0 20px rgba(139,92,246,.4);z-index:1;
-}
+.step-circle{width:42px;height:42px;flex-shrink:0;border-radius:50%;background:linear-gradient(135deg,var(--pd),var(--p));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;box-shadow:0 0 20px rgba(139,92,246,.4);z-index:1}
 .step-body{padding-top:8px}
 .step-body h3{font-size:17px;font-weight:700;margin-bottom:8px}
 .step-body p{font-size:14px;color:var(--m);line-height:1.7}
-
-/* right: visual timeline */
-.how-visual{
-  background:var(--bg3);border:1px solid rgba(139,92,246,.12);
-  border-radius:24px;padding:32px;
-  opacity:0;transform:translateX(30px);
-}
-
-.vis-row{
-  display:flex;align-items:center;gap:14px;padding:14px 0;
-  border-bottom:1px solid rgba(255,255,255,.05);
-}
+.how-visual{background:var(--bg3);border:1px solid rgba(139,92,246,.12);border-radius:24px;padding:32px;opacity:0;transform:translateX(30px)}
+.vis-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05)}
 .vis-row:last-child{border-bottom:none}
-
-.vis-icon{
-  width:40px;height:40px;border-radius:10px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;font-size:18px;
-}
+.vis-icon{width:40px;height:40px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px}
 .vis-icon.purple{background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.25)}
 .vis-icon.green{background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.2)}
 .vis-icon.blue{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2)}
 .vis-icon.yellow{background:rgba(234,179,8,.1);border:1px solid rgba(234,179,8,.2)}
-
 .vis-info{flex:1}
 .vis-label{font-size:13px;font-weight:600}
 .vis-sub{font-size:11px;color:var(--m);margin-top:2px}
-
-.vis-badge{
-  font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;
-}
+.vis-badge{font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px}
 .vis-badge.on{background:rgba(37,211,102,.15);color:var(--g);border:1px solid rgba(37,211,102,.25)}
 .vis-badge.wait{background:rgba(139,92,246,.15);color:var(--pl);border:1px solid rgba(139,92,246,.25)}
 
 /* ── NUMBERS ── */
 #numbers{padding:120px 24px}
-
-.numbers-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:2px;
-  border:1px solid rgba(139,92,246,.12);border-radius:24px;overflow:hidden;
-  margin-top:72px;
-}
+.numbers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;border:1px solid rgba(139,92,246,.12);border-radius:24px;overflow:hidden;margin-top:72px}
 @media(max-width:768px){.numbers-grid{grid-template-columns:repeat(2,1fr)}}
-
-.num-card{
-  padding:48px 32px;text-align:center;background:var(--bg2);
-  border-right:1px solid rgba(139,92,246,.08);
-  opacity:0;
-}
+.num-card{padding:48px 32px;text-align:center;background:var(--bg2);border-right:1px solid rgba(139,92,246,.08);opacity:0}
 .num-card:last-child{border-right:none}
-
-.num-val{
-  font-size:56px;font-weight:900;line-height:1;
-  background:linear-gradient(135deg,var(--p),var(--pl));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-}
+.num-val{font-size:56px;font-weight:900;line-height:1;background:linear-gradient(135deg,var(--p),var(--pl));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .num-label{font-size:13px;color:var(--m);margin-top:10px}
 
 /* ── MISSION ── */
-#mission{
-  padding:160px 24px;
-  background:radial-gradient(ellipse at 50% 0%,rgba(91,33,182,.15) 0%,transparent 70%);
-  text-align:center;
-}
-
-.mission-text{
-  font-size:clamp(28px,4vw,52px);font-weight:900;
-  line-height:1.15;max-width:820px;margin:0 auto 40px;
-  opacity:0;
-}
-.mission-text .g{
-  background:linear-gradient(135deg,var(--p),var(--pl),#e879f9);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-}
-
-.mission-sub{
-  font-size:18px;color:var(--m);max-width:520px;
-  margin:0 auto 56px;line-height:1.7;opacity:0;
-}
-
+#mission{padding:160px 24px;background:radial-gradient(ellipse at 50% 0%,rgba(91,33,182,.15) 0%,transparent 70%);text-align:center}
+.mission-text{font-size:clamp(28px,4vw,52px);font-weight:900;line-height:1.15;max-width:820px;margin:0 auto 40px;opacity:0}
+.mission-text .g{background:linear-gradient(135deg,var(--p),var(--pl),#e879f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.mission-sub{font-size:18px;color:var(--m);max-width:520px;margin:0 auto 56px;line-height:1.7;opacity:0}
 .cta-pair{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;opacity:0}
-
-.btn-wa{
-  display:inline-flex;align-items:center;gap:12px;
-  background:var(--g);color:#000;font-weight:800;font-size:15px;
-  padding:18px 36px;border-radius:50px;text-decoration:none;
-  box-shadow:0 0 40px rgba(37,211,102,.35);
-  transition:transform .25s,box-shadow .25s;
-}
+.btn-wa{display:inline-flex;align-items:center;gap:12px;background:var(--g);color:#000;font-weight:800;font-size:15px;padding:18px 36px;border-radius:50px;text-decoration:none;box-shadow:0 0 40px rgba(37,211,102,.35);transition:transform .25s,box-shadow .25s}
 .btn-wa:hover{transform:translateY(-3px);box-shadow:0 16px 50px rgba(37,211,102,.6)}
-
-.btn-ghost{
-  display:inline-flex;align-items:center;gap:12px;
-  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
-  color:var(--t);font-weight:600;font-size:15px;
-  padding:18px 36px;border-radius:50px;text-decoration:none;
-  transition:background .2s;
-}
+.btn-ghost{display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--t);font-weight:600;font-size:15px;padding:18px 36px;border-radius:50px;text-decoration:none;transition:background .2s}
 .btn-ghost:hover{background:rgba(255,255,255,.08)}
 
 /* ── FOOTER ── */
-footer{
-  padding:48px 24px;
-  border-top:1px solid rgba(255,255,255,.05);
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:20px;
-}
-.footer-logo{
-  font-size:16px;font-weight:900;
-  background:linear-gradient(135deg,var(--p),var(--pl));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-}
+footer{padding:48px 24px;border-top:1px solid rgba(255,255,255,.05);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.footer-logo{font-size:16px;font-weight:900;background:linear-gradient(135deg,var(--p),var(--pl));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 footer p{font-size:12px;color:var(--m)}
-
-/* ── FLOAT WA ── */
-.float-wa{
-  position:fixed;bottom:32px;right:32px;z-index:300;
-  width:56px;height:56px;border-radius:50%;
-  background:var(--g);display:flex;align-items:center;justify-content:center;
-  box-shadow:0 8px 30px rgba(37,211,102,.5);
-  text-decoration:none;font-size:24px;
-  transition:transform .2s;
-  animation:waPulse 2.5s infinite;
-}
+.float-wa{position:fixed;bottom:32px;right:32px;z-index:300;width:56px;height:56px;border-radius:50%;background:var(--g);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(37,211,102,.5);text-decoration:none;font-size:24px;transition:transform .2s;animation:waPulse 2.5s infinite}
 .float-wa:hover{transform:scale(1.1)}
-@keyframes waPulse{0%,100%{box-shadow:0 8px 30px rgba(37,211,102,.5)}50%{box-shadow:0 8px 50px rgba(37,211,102,.85)}}
-
-@media(max-width:640px){
-  .float-wa{bottom:20px;right:20px;width:48px;height:48px;font-size:20px}
-  footer{flex-direction:column;text-align:center}
-}
+@keyframes waPulse{0%,100%{box-shadow:0 8px 30px rgba(37,211,102,.5)}50%{box-shadow:0 8px 50px rgba(37,211,102,.9)}}
+@media(max-width:640px){.float-wa{bottom:20px;right:20px;width:48px;height:48px;font-size:20px}footer{flex-direction:column;text-align:center}}
 </style>
 </head>
 <body>
 
-<!-- 3D CANVAS -->
 <canvas id="bg-canvas"></canvas>
 
 <!-- NAV -->
@@ -475,42 +410,208 @@ footer p{font-size:12px;color:var(--m)}
     ZÊNITE
   </div>
   <div class="nav-links">
-    <a href="#what">O que fazemos</a>
+    <a href="#what">Serviços</a>
     <a href="#how">Como funciona</a>
-    <a href="#mission">Propósito</a>
+    <a href="#numbers">Resultados</a>
+    <a href="#mission">Contato</a>
   </div>
   <a href="https://wa.me/5548991101528?text=Oi!%20Vi%20o%20site%20da%20Zênite%20e%20quero%20saber%20mais." class="btn-nav" target="_blank">Falar agora →</a>
 </nav>
 
-<!-- HERO -->
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
 <section id="hero">
-  <div class="hero-inner">
+  <div class="hero-left">
     <div class="hero-eyebrow">
-      <span style="width:7px;height:7px;background:var(--p);border-radius:50%;animation:fadeIn 1s infinite alternate"></span>
-      Automação inteligente para negócios
+      <span style="width:7px;height:7px;background:var(--p);border-radius:50%;animation:waPulse 1.5s infinite"></span>
+      Agência digital full-stack · Florianópolis
     </div>
 
     <h1 class="hero-title">
-      <span class="line"><span class="word">Tecnologia que</span></span>
-      <span class="line"><span class="word g">liberta</span> <span class="word">o seu</span></span>
-      <span class="line"><span class="word">potencial humano</span></span>
+      Seu negócio<br>
+      atendendo<br>
+      <span class="g">24h por dia</span>
     </h1>
 
     <p class="hero-sub">
-      Eliminamos o trabalho repetitivo para que você possa focar no que só você pode fazer. Sistemas inteligentes que atendem, qualificam e convertem — enquanto você vive.
+      Criamos bots de WhatsApp com IA, sites, automações e conteúdo para negócios que não param. Enquanto você descansa, a Zênite trabalha.
     </p>
 
     <div class="hero-ctas">
       <a href="https://wa.me/5548991101528?text=Oi!%20Vi%20o%20site%20da%20Zênite%20e%20quero%20automatizar%20meu%20negócio." target="_blank" class="btn-hero-primary">
-        💬 Quero automatizar meu negócio
+        💬 Quero automatizar agora
       </a>
-      <a href="#manifesto" class="btn-hero-ghost">
-        Nosso propósito ↓
+      <a href="#what" class="btn-hero-ghost">
+        Ver serviços ↓
       </a>
     </div>
   </div>
 
-  <div class="scroll-hint">
+  <div class="hero-right">
+    <div class="robot-scene">
+
+      <!-- Orbit rings decorativos -->
+      <div class="orbit orbit1"></div>
+      <div class="orbit orbit2"></div>
+
+      <!-- Aura glow -->
+      <div class="robot-aura"></div>
+
+      <!-- Balão humano (esquerda) -->
+      <div class="human-chat">
+        <strong style="color:var(--t);display:block;margin-bottom:4px">👤 Cliente</strong>
+        Oi! Vocês fazem harmonização? Qual o valor? 🙏
+        <div style="font-size:9px;opacity:.35;margin-top:4px;text-align:right">23:07</div>
+      </div>
+
+      <!-- Robô SVG animado -->
+      <div class="robot-wrap" id="robotWrap">
+        <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg" style="width:100%">
+          <defs>
+            <radialGradient id="bodyGrad" cx="50%" cy="40%" r="60%">
+              <stop offset="0%" stop-color="#7c3aed"/>
+              <stop offset="100%" stop-color="#3b0764"/>
+            </radialGradient>
+            <radialGradient id="headGrad" cx="50%" cy="35%" r="60%">
+              <stop offset="0%" stop-color="#8b5cf6"/>
+              <stop offset="100%" stop-color="#4c1d95"/>
+            </radialGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="blur"/>
+              <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+            </filter>
+            <linearGradient id="eyeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#c4b5fd"/>
+              <stop offset="100%" stop-color="#e879f9"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Antena -->
+          <line x1="100" y1="20" x2="100" y2="42" stroke="#6d28d9" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="100" cy="14" r="7" fill="#8b5cf6" filter="url(#glow)">
+            <animate attributeName="opacity" values="1;0.4;1" dur="1.8s" repeatCount="indefinite"/>
+            <animate attributeName="r" values="7;9;7" dur="1.8s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="100" cy="14" r="3" fill="#e879f9"/>
+
+          <!-- Cabeça -->
+          <rect x="58" y="42" width="84" height="72" rx="22" fill="url(#headGrad)" stroke="#6d28d9" stroke-width="1.5"/>
+
+          <!-- Olhos -->
+          <rect x="70" y="60" width="22" height="14" rx="7" fill="url(#eyeGrad)" filter="url(#glow)">
+            <animate attributeName="height" values="14;3;14" dur="3.5s" begin="0.5s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="108" y="60" width="22" height="14" rx="7" fill="url(#eyeGrad)" filter="url(#glow)">
+            <animate attributeName="height" values="14;3;14" dur="3.5s" begin="0.5s" repeatCount="indefinite"/>
+          </rect>
+
+          <!-- Scan line nos olhos -->
+          <rect x="70" y="60" width="22" height="3" rx="1.5" fill="#e879f9" opacity="0.6">
+            <animate attributeName="y" values="60;74;60" dur="1.5s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="108" y="60" width="22" height="3" rx="1.5" fill="#e879f9" opacity="0.6">
+            <animate attributeName="y" values="60;74;60" dur="1.5s" repeatCount="indefinite"/>
+          </rect>
+
+          <!-- Boca / painel -->
+          <rect x="76" y="90" width="48" height="12" rx="6" fill="#1a0840" stroke="#6d28d9" stroke-width="1"/>
+          <rect x="79" y="93" width="8" height="6" rx="3" fill="#25d366">
+            <animate attributeName="opacity" values="1;0.2;1" dur=".8s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="91" y="93" width="8" height="6" rx="3" fill="#8b5cf6">
+            <animate attributeName="opacity" values="1;0.2;1" dur=".8s" begin=".2s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="103" y="93" width="8" height="6" rx="3" fill="#e879f9">
+            <animate attributeName="opacity" values="1;0.2;1" dur=".8s" begin=".4s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="115" y="93" width="6" height="6" rx="3" fill="#c4b5fd">
+            <animate attributeName="opacity" values="1;0.2;1" dur=".8s" begin=".6s" repeatCount="indefinite"/>
+          </rect>
+
+          <!-- Pescoço -->
+          <rect x="88" y="112" width="24" height="14" rx="6" fill="#4c1d95"/>
+
+          <!-- Corpo -->
+          <rect x="46" y="124" width="108" height="90" rx="24" fill="url(#bodyGrad)" stroke="#5b21b6" stroke-width="1.5"/>
+
+          <!-- Painel peito -->
+          <rect x="62" y="140" width="76" height="52" rx="12" fill="#1a0840" stroke="#6d28d9" stroke-width="1" opacity="0.9"/>
+
+          <!-- WhatsApp icon no peito -->
+          <circle cx="100" cy="166" r="18" fill="#075e54">
+            <animate attributeName="r" values="18;20;18" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <text x="100" y="172" text-anchor="middle" font-size="18" fill="#25d366">💬</text>
+
+          <!-- LED indicators no corpo -->
+          <circle cx="68" cy="148" r="4" fill="#25d366" filter="url(#glow)">
+            <animate attributeName="opacity" values="1;0.3;1" dur="1.2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="80" cy="148" r="4" fill="#8b5cf6" filter="url(#glow)">
+            <animate attributeName="opacity" values="1;0.3;1" dur="1.2s" begin=".3s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="68" cy="184" r="3" fill="#e879f9">
+            <animate attributeName="opacity" values="1;0.2;1" dur="1.5s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- Braço esquerdo -->
+          <rect x="16" y="128" width="32" height="72" rx="16" fill="url(#bodyGrad)" stroke="#5b21b6" stroke-width="1.5">
+            <animateTransform attributeName="transform" type="rotate" values="0 32 164;12 32 164;0 32 164" dur="2.5s" repeatCount="indefinite"/>
+          </rect>
+          <!-- Mão esquerda -->
+          <circle cx="32" cy="208" r="12" fill="#4c1d95" stroke="#6d28d9" stroke-width="1"/>
+
+          <!-- Braço direito (acenando/digitando) -->
+          <rect x="152" y="128" width="32" height="72" rx="16" fill="url(#bodyGrad)" stroke="#5b21b6" stroke-width="1.5">
+            <animateTransform attributeName="transform" type="rotate" values="0 168 164;-15 168 164;0 168 164" dur="1.8s" repeatCount="indefinite"/>
+          </rect>
+          <!-- Mão direita -->
+          <circle cx="168" cy="208" r="12" fill="#4c1d95" stroke="#6d28d9" stroke-width="1"/>
+
+          <!-- Pernas -->
+          <rect x="68" y="210" width="28" height="44" rx="14" fill="#3b0764" stroke="#4c1d95" stroke-width="1"/>
+          <rect x="104" y="210" width="28" height="44" rx="14" fill="#3b0764" stroke="#4c1d95" stroke-width="1"/>
+
+          <!-- Pés -->
+          <ellipse cx="82" cy="252" rx="18" ry="8" fill="#2e0a63"/>
+          <ellipse cx="118" cy="252" rx="18" ry="8" fill="#2e0a63"/>
+        </svg>
+      </div>
+
+      <!-- WhatsApp chat bubble (direita, acima) -->
+      <div class="wa-chat">
+        <div class="wa-top">
+          <div class="wa-av">🤖</div>
+          <div>
+            <div class="wa-name">Atendente IA · Zênite</div>
+            <div class="wa-online">online agora</div>
+          </div>
+        </div>
+        <div class="wa-body">
+          <div class="wa-msg-human" id="wm1">
+            Oi! Fazem harmonização?<span class="wa-time">23:07</span>
+          </div>
+          <div class="wa-typing" id="wt1"><div class="td"></div><div class="td"></div><div class="td"></div></div>
+          <div class="wa-msg-bot" id="wm2">
+            <div class="wa-tag">⚡ IA Zênite</div>
+            Olá! 😊 Sim! A partir de R$1.200. Quer avaliação grátis essa semana?<span class="wa-time">23:07</span><span class="wa-check">✓✓</span>
+          </div>
+          <div class="wa-msg-human" id="wm3">
+            Sim! Quinta à tarde 🙏<span class="wa-time">23:08</span>
+          </div>
+          <div class="wa-typing" id="wt2"><div class="td"></div><div class="td"></div><div class="td"></div></div>
+          <div class="wa-msg-bot" id="wm4">
+            <div class="wa-tag">⚡ IA Zênite</div>
+            ✅ Quinta 15h confirmado! Vou lembrar você na véspera 🌟<span class="wa-time">23:08</span><span class="wa-check">✓✓</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="scroll-hint" style="position:fixed;bottom:40px;left:50%">
     <div class="scroll-line"></div>
     scroll
   </div>
@@ -520,13 +621,13 @@ footer p{font-size:12px;color:var(--m)}
 
 <!-- MANIFESTO -->
 <section id="manifesto">
-  <div class="manifesto-inner">
+  <div style="max-width:860px;margin:0 auto;text-align:center">
     <div class="manifesto-label">Nosso propósito</div>
     <h2 class="manifesto-text">
-      Acreditamos que <em>nenhuma pessoa</em> deveria perder tempo respondendo as mesmas perguntas, todos os dias, para sempre.
+      Nenhum negócio deveria perder clientes por não ter alguém disponível <em>24 horas por dia.</em>
     </h2>
     <p class="manifesto-sub">
-      A tecnologia existe para ampliar o que os humanos podem fazer — não para substituir, mas para libertar. Criamos sistemas que trabalham enquanto você descansa, para que você só precise estar presente quando realmente importa.
+      Criamos a tecnologia que faz o seu atendimento nunca parar — bots, automações, sites e conteúdo que trabalham enquanto você descansa, viaja ou atende pessoalmente.
     </p>
   </div>
 </section>
@@ -539,20 +640,18 @@ footer p{font-size:12px;color:var(--m)}
     <div class="sec-header">
       <div class="sec-tag">O que fazemos</div>
       <h2 class="sec-title">Automação que pensa.<br>Resultados que aparecem.</h2>
-      <p class="sec-sub">Cada sistema é construído para o seu negócio — não um template genérico, mas uma solução que entende sua linguagem, seus clientes e seus horários.</p>
+      <p class="sec-sub">Cada solução é construída para o seu negócio — não um template genérico, mas um sistema que fala a sua linguagem.</p>
     </div>
 
     <div class="what-grid">
-
-      <!-- BIG CARD -->
       <div class="what-card big">
         <div class="card-glow"></div>
         <div class="big-inner">
           <div>
             <div class="card-icon">💬</div>
             <div class="card-label">Atendimento 24h</div>
-            <h3 class="card-title">Atendente de IA no WhatsApp que nunca dorme</h3>
-            <p class="card-text">Responde em menos de 30 segundos, qualifica o lead, apresenta seus serviços com sua linguagem e fecha o agendamento — tudo isso às 23h de uma segunda-feira de feriado.</p>
+            <h3 class="card-title">Bot de WhatsApp com IA que nunca dorme</h3>
+            <p class="card-text">Responde em menos de 30 segundos, qualifica o lead, apresenta seus serviços com sua linguagem e fecha o agendamento — tudo isso às 23h de um domingo.</p>
           </div>
           <div class="chat-demo">
             <div class="chat-top">
@@ -576,20 +675,19 @@ footer p{font-size:12px;color:var(--m)}
 
       <div class="what-card">
         <div class="card-glow"></div>
-        <div class="card-icon">📅</div>
-        <div class="card-label">Agendamento</div>
-        <h3 class="card-title">Agenda automática com confirmações</h3>
-        <p class="card-text">O sistema abre sua agenda, sugere horários disponíveis, confirma o cliente e envia lembretes automáticos. Fim dos no-shows.</p>
+        <div class="card-icon">🌐</div>
+        <div class="card-label">Sites & Landing Pages</div>
+        <h3 class="card-title">Sites que convertem em clientes</h3>
+        <p class="card-text">Desenvolvemos sites rápidos, modernos e integrados com seu bot de WhatsApp — do design à publicação em dias, não meses.</p>
       </div>
 
       <div class="what-card">
         <div class="card-glow"></div>
         <div class="card-icon">🔁</div>
-        <div class="card-label">Fluxos automáticos</div>
-        <h3 class="card-title">Processos que rodam sem você</h3>
-        <p class="card-text">Desde captação de leads até pós-venda: construímos fluxos completos que operam de forma autônoma e escalam com seu negócio.</p>
+        <div class="card-label">Automação de Processos</div>
+        <h3 class="card-title">Fluxos que rodam sem você</h3>
+        <p class="card-text">Confirmações, lembretes, pós-venda, reativação de clientes inativos — tudo automático, tudo no seu ritmo, sem contratar ninguém.</p>
       </div>
-
     </div>
   </div>
 </section>
@@ -603,81 +701,36 @@ footer p{font-size:12px;color:var(--m)}
       <div class="sec-tag">Como funciona</div>
       <h2 class="sec-title">Da mensagem ao resultado<br><span style="background:linear-gradient(135deg,var(--p),var(--pl));-webkit-background-clip:text;-webkit-text-fill-color:transparent">sem nenhuma intervenção</span></h2>
     </div>
-
     <div class="how-grid">
       <div class="steps-list">
         <div class="step-item">
           <div class="step-circle">1</div>
-          <div class="step-body">
-            <h3>Cliente manda mensagem</h3>
-            <p>Qualquer hora, qualquer dia. O sistema está sempre ativo e responde em menos de 30 segundos — sem fila, sem espera.</p>
-          </div>
+          <div class="step-body"><h3>Cliente manda mensagem</h3><p>Qualquer hora, qualquer dia. O sistema está sempre ativo e responde em menos de 30 segundos — sem fila, sem espera.</p></div>
         </div>
         <div class="step-item">
           <div class="step-circle">2</div>
-          <div class="step-body">
-            <h3>IA entende e qualifica</h3>
-            <p>Identifica o que o cliente precisa, responde com a linguagem do seu negócio e filtra quem tem real intenção de compra.</p>
-          </div>
+          <div class="step-body"><h3>IA entende e qualifica</h3><p>Identifica o que o cliente precisa, responde com a linguagem do seu negócio e filtra quem tem real intenção de compra.</p></div>
         </div>
         <div class="step-item">
           <div class="step-circle">3</div>
-          <div class="step-body">
-            <h3>Agenda e confirma</h3>
-            <p>Sugere horários, confirma o agendamento em tempo real e envia lembretes automáticos antes do compromisso.</p>
-          </div>
+          <div class="step-body"><h3>Agenda e confirma</h3><p>Sugere horários, confirma o agendamento em tempo real e envia lembretes automáticos antes do compromisso.</p></div>
         </div>
         <div class="step-item">
           <div class="step-circle">4</div>
-          <div class="step-body">
-            <h3>Você só entra quando importa</h3>
-            <p>Leads qualificados chegam prontos. Você não perde tempo com dúvidas repetitivas — só fecha negócio.</p>
-          </div>
+          <div class="step-body"><h3>Você só entra quando importa</h3><p>Leads qualificados chegam prontos. Você não perde tempo com dúvidas repetitivas — só fecha negócio.</p></div>
         </div>
       </div>
-
       <div class="how-visual">
         <div style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--m);margin-bottom:20px">Sistema ao vivo</div>
-        <div class="vis-row">
-          <div class="vis-icon purple">💬</div>
-          <div class="vis-info">
-            <div class="vis-label">WhatsApp IA</div>
-            <div class="vis-sub">Respondendo automaticamente</div>
-          </div>
-          <div class="vis-badge on">● ativo</div>
-        </div>
-        <div class="vis-row">
-          <div class="vis-icon green">📅</div>
-          <div class="vis-info">
-            <div class="vis-label">Agendamento</div>
-            <div class="vis-sub">3 novos hoje</div>
-          </div>
-          <div class="vis-badge on">● ativo</div>
-        </div>
-        <div class="vis-row">
-          <div class="vis-icon blue">🔔</div>
-          <div class="vis-info">
-            <div class="vis-label">Lembretes</div>
-            <div class="vis-sub">Enviando em 2h</div>
-          </div>
-          <div class="vis-badge wait">aguardando</div>
-        </div>
-        <div class="vis-row">
-          <div class="vis-icon yellow">📊</div>
-          <div class="vis-info">
-            <div class="vis-label">Taxa de resposta</div>
-            <div class="vis-sub">100% — 24h por dia</div>
-          </div>
-          <div class="vis-badge on">● ativo</div>
-        </div>
+        <div class="vis-row"><div class="vis-icon purple">💬</div><div class="vis-info"><div class="vis-label">WhatsApp IA</div><div class="vis-sub">Respondendo automaticamente</div></div><div class="vis-badge on">● ativo</div></div>
+        <div class="vis-row"><div class="vis-icon green">📅</div><div class="vis-info"><div class="vis-label">Agendamento</div><div class="vis-sub">3 novos hoje</div></div><div class="vis-badge on">● ativo</div></div>
+        <div class="vis-row"><div class="vis-icon blue">🔔</div><div class="vis-info"><div class="vis-label">Lembretes</div><div class="vis-sub">Enviando em 2h</div></div><div class="vis-badge wait">aguardando</div></div>
+        <div class="vis-row"><div class="vis-icon yellow">📊</div><div class="vis-info"><div class="vis-label">Taxa de resposta</div><div class="vis-sub">100% — 24h por dia</div></div><div class="vis-badge on">● ativo</div></div>
         <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.05)">
           <div style="font-size:11px;color:var(--m);margin-bottom:12px">Última mensagem respondida</div>
           <div style="display:flex;align-items:center;gap:12px">
             <div style="width:8px;height:8px;border-radius:50%;background:var(--g);flex-shrink:0;animation:waPulse 1.5s infinite"></div>
-            <div>
-              <div style="font-size:13px;font-weight:600">há 18 segundos</div>
-              <div style="font-size:11px;color:var(--m)">"Qual o valor para depilação a laser?"</div>
-            </div>
+            <div><div style="font-size:13px;font-weight:600">há 18 segundos</div><div style="font-size:11px;color:var(--m)">"Qual o valor para depilação a laser?"</div></div>
           </div>
         </div>
       </div>
@@ -708,12 +761,8 @@ footer p{font-size:12px;color:var(--m)}
 <!-- MISSION / CTA -->
 <section id="mission">
   <div class="container">
-    <h2 class="mission-text">
-      Pronto para parar de perder clientes e começar a <span class="g">escalar de verdade?</span>
-    </h2>
-    <p class="mission-sub">
-      Uma conversa sem compromisso. Entendemos seu negócio e mostramos exatamente o que a automação pode mudar.
-    </p>
+    <h2 class="mission-text">Pronto para parar de perder clientes e começar a <span class="g">escalar de verdade?</span></h2>
+    <p class="mission-sub">Uma conversa sem compromisso. Entendemos seu negócio e mostramos exatamente o que a automação pode mudar.</p>
     <div class="cta-pair">
       <a href="https://wa.me/5548991101528?text=Oi!%20Vi%20o%20site%20da%20Zênite%20e%20quero%20uma%20conversa%20sobre%20automação." target="_blank" class="btn-wa">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.862L.054 23.25a.75.75 0 00.916.916l5.388-1.479A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.652-.51-5.17-1.4l-.36-.214-3.742 1.027 1.027-3.742-.214-.36A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
@@ -727,240 +776,161 @@ footer p{font-size:12px;color:var(--m)}
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">⚡ ZÊNITE SOLUÇÕES EM TECNOLOGIA</div>
-  <p>Automação inteligente. Resultados reais.</p>
-  <p>© 2025 Zênite. Todos os direitos reservados.</p>
+  <p>Bot WhatsApp · Sites · Automação · Florianópolis, SC</p>
+  <p>© 2026 Zênite. Todos os direitos reservados.</p>
 </footer>
 
-<!-- FLOAT WA -->
 <a href="https://wa.me/5548991101528?text=Oi!%20Vi%20o%20site%20da%20Zênite." target="_blank" class="float-wa">💬</a>
 
-<!-- THREE.JS 3D BACKGROUND -->
+<!-- ══ THREE.JS BACKGROUND ══ -->
 <script>
-(function() {
-  const canvas = document.getElementById('bg-canvas');
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setClearColor(0x000000, 0);
+(function(){
+  const canvas=document.getElementById('bg-canvas');
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.setSize(window.innerWidth,window.innerHeight);
+  renderer.setClearColor(0x000000,0);
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,0.1,100);
+  camera.position.z=8;
 
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
-  camera.position.z = 8;
-
-  // ── FLOATING SPHERES ──
-  const spheres = [];
-  const sphereData = [
-    { x: -4,  y:  2,  z: -3, r: 1.2,  speed: 0.4,  color: 0x5b21b6 },
-    { x:  4,  y: -1,  z: -2, r: 0.8,  speed: 0.6,  color: 0x7c3aed },
-    { x:  0,  y:  3,  z: -5, r: 2.0,  speed: 0.25, color: 0x4c1d95 },
-    { x: -5,  y: -3,  z: -4, r: 0.6,  speed: 0.8,  color: 0x8b5cf6 },
-    { x:  5,  y:  4,  z: -6, r: 1.5,  speed: 0.35, color: 0x6d28d9 },
-    { x:  2,  y: -4,  z: -3, r: 0.5,  speed: 1.0,  color: 0xa78bfa },
-    { x: -2,  y:  0,  z: -6, r: 1.0,  speed: 0.5,  color: 0x3b0764 },
-  ];
-
-  sphereData.forEach(d => {
-    const geo = new THREE.SphereGeometry(d.r, 32, 32);
-    const mat = new THREE.MeshPhongMaterial({
-      color: d.color,
-      emissive: d.color,
-      emissiveIntensity: 0.3,
-      transparent: true,
-      opacity: 0.55,
-      shininess: 80,
-    });
-    const mesh = new THREE.Mesh(geo, mat);
-    mesh.position.set(d.x, d.y, d.z);
+  // Esferas flutuantes roxas
+  const spheres=[];
+  [{x:-4,y:2,z:-3,r:1.2,s:.4,c:0x5b21b6},{x:4,y:-1,z:-2,r:.8,s:.6,c:0x7c3aed},
+   {x:0,y:3,z:-5,r:2,s:.25,c:0x4c1d95},{x:-5,y:-3,z:-4,r:.6,s:.8,c:0x8b5cf6},
+   {x:5,y:4,z:-6,r:1.5,s:.35,c:0x6d28d9},{x:2,y:-4,z:-3,r:.5,s:1,c:0xa78bfa},
+   {x:-2,y:0,z:-6,r:1,s:.5,c:0x3b0764}].forEach(d=>{
+    const mat=new THREE.MeshPhongMaterial({color:d.c,emissive:d.c,emissiveIntensity:.3,transparent:true,opacity:.55,shininess:80});
+    const mesh=new THREE.Mesh(new THREE.SphereGeometry(d.r,32,32),mat);
+    mesh.position.set(d.x,d.y,d.z);
     scene.add(mesh);
-    spheres.push({ mesh, ...d, ox: d.x, oy: d.y, phase: Math.random() * Math.PI * 2 });
+    spheres.push({mesh,...d,ox:d.x,oy:d.y,phase:Math.random()*Math.PI*2});
   });
 
-  // ── LIGHTS ──
-  const ambientLight = new THREE.AmbientLight(0x1a0040, 2);
-  scene.add(ambientLight);
+  // Luzes
+  scene.add(new THREE.AmbientLight(0x1a0040,2));
+  const pL=new THREE.PointLight(0x8b5cf6,8,20);pL.position.set(0,5,3);scene.add(pL);
+  const bL=new THREE.PointLight(0x4f46e5,5,15);bL.position.set(-5,-3,2);scene.add(bL);
+  const pkL=new THREE.PointLight(0xe879f9,4,12);pkL.position.set(5,2,1);scene.add(pkL);
 
-  const purpleLight = new THREE.PointLight(0x8b5cf6, 8, 20);
-  purpleLight.position.set(0, 5, 3);
-  scene.add(purpleLight);
-
-  const blueLight = new THREE.PointLight(0x4f46e5, 5, 15);
-  blueLight.position.set(-5, -3, 2);
-  scene.add(blueLight);
-
-  const pinkLight = new THREE.PointLight(0xe879f9, 4, 12);
-  pinkLight.position.set(5, 2, 1);
-  scene.add(pinkLight);
-
-  // ── PARTICLES ──
-  const pCount = 300;
-  const pGeo = new THREE.BufferGeometry();
-  const pPos = new Float32Array(pCount * 3);
-  for (let i = 0; i < pCount * 3; i++) {
-    pPos[i] = (Math.random() - 0.5) * 20;
-  }
-  pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-  const pMat = new THREE.PointsMaterial({
-    color: 0x8b5cf6,
-    size: 0.04,
-    transparent: true,
-    opacity: 0.6,
-  });
-  const particles = new THREE.Points(pGeo, pMat);
+  // Partículas
+  const pC=350,pGeo=new THREE.BufferGeometry(),pPos=new Float32Array(pC*3);
+  for(let i=0;i<pC*3;i++)pPos[i]=(Math.random()-.5)*22;
+  pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));
+  const particles=new THREE.Points(pGeo,new THREE.PointsMaterial({color:0x8b5cf6,size:.04,transparent:true,opacity:.55}));
   scene.add(particles);
 
-  // ── MOUSE ──
-  const mouse = { x: 0, y: 0 };
-  window.addEventListener('mousemove', e => {
-    mouse.x = (e.clientX / window.innerWidth - 0.5) * 2;
-    mouse.y = -(e.clientY / window.innerHeight - 0.5) * 2;
-  });
+  // Grid wireframe sutil no fundo
+  const gridHelper=new THREE.GridHelper(30,30,0x2d1b69,0x160a35);
+  gridHelper.position.y=-5;gridHelper.material.opacity=0.3;gridHelper.material.transparent=true;
+  scene.add(gridHelper);
 
-  // ── RESIZE ──
-  window.addEventListener('resize', () => {
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-  });
+  const mouse={x:0,y:0};
+  window.addEventListener('mousemove',e=>{mouse.x=(e.clientX/window.innerWidth-.5)*2;mouse.y=-(e.clientY/window.innerHeight-.5)*2});
+  window.addEventListener('resize',()=>{renderer.setSize(window.innerWidth,window.innerHeight);camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix()});
+  let scrollY=0;window.addEventListener('scroll',()=>{scrollY=window.scrollY});
 
-  // ── SCROLL ──
-  let scrollY = 0;
-  window.addEventListener('scroll', () => { scrollY = window.scrollY; });
-
-  // ── ANIMATE ──
-  let t = 0;
-  function animate() {
-    requestAnimationFrame(animate);
-    t += 0.008;
-
-    // float spheres
-    spheres.forEach((s, i) => {
-      s.mesh.position.x = s.ox + Math.sin(t * s.speed + s.phase) * 0.4;
-      s.mesh.position.y = s.oy + Math.cos(t * s.speed * 0.7 + s.phase) * 0.3;
-      s.mesh.rotation.y += 0.003 * s.speed;
-      s.mesh.rotation.x += 0.002 * s.speed;
+  let t=0;
+  (function animate(){
+    requestAnimationFrame(animate);t+=.008;
+    spheres.forEach(s=>{
+      s.mesh.position.x=s.ox+Math.sin(t*s.s+s.phase)*.4;
+      s.mesh.position.y=s.oy+Math.cos(t*s.s*.7+s.phase)*.3;
+      s.mesh.rotation.y+=.003*s.s;s.mesh.rotation.x+=.002*s.s;
     });
-
-    // pulse lights
-    purpleLight.intensity = 6 + Math.sin(t * 1.2) * 2;
-    pinkLight.intensity   = 3 + Math.cos(t * 0.8) * 1.5;
-
-    // camera drift with mouse
-    camera.position.x += (mouse.x * 0.5 - camera.position.x) * 0.03;
-    camera.position.y += (mouse.y * 0.3 - camera.position.y) * 0.03;
-    camera.position.z = 8 + scrollY * 0.003;
-
-    // particles rotate
-    particles.rotation.y = t * 0.05;
-    particles.rotation.x = t * 0.03;
-
-    renderer.render(scene, camera);
-  }
-  animate();
+    pL.intensity=6+Math.sin(t*1.2)*2;pkL.intensity=3+Math.cos(t*.8)*1.5;
+    camera.position.x+=(mouse.x*.5-camera.position.x)*.03;
+    camera.position.y+=(mouse.y*.3-camera.position.y)*.03;
+    camera.position.z=8+scrollY*.003;
+    particles.rotation.y=t*.05;particles.rotation.x=t*.03;
+    gridHelper.rotation.y=t*.01;
+    renderer.render(scene,camera);
+  })();
 })();
 </script>
 
-<!-- GSAP ANIMATIONS -->
+<!-- ══ GSAP ANIMATIONS ══ -->
 <script>
 gsap.registerPlugin(ScrollTrigger);
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60));
 
-// NAV scroll
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
-});
+// Hero
+const tl=gsap.timeline({defaults:{ease:'power3.out'}});
+tl.to('.hero-eyebrow',{opacity:1,y:0,duration:.8,delay:.3})
+  .to('.hero-title',{opacity:1,y:0,duration:.9},'-=.5')
+  .to('.hero-sub',{opacity:1,y:0,duration:.8},'-=.6')
+  .to('.hero-ctas',{opacity:1,y:0,duration:.8},'-=.6');
 
-// HERO
-const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-tl.to('.hero-eyebrow', { opacity:1, y:0, duration:.8, delay:.3 })
-  .to('.hero-title',   { opacity:1, y:0, duration:.9 }, '-=.5')
-  .to('.hero-sub',     { opacity:1, y:0, duration:.8 }, '-=.6')
-  .to('.hero-ctas',    { opacity:1, y:0, duration:.8 }, '-=.6');
+// Manifesto
+gsap.to('.manifesto-label',{scrollTrigger:{trigger:'#manifesto',start:'top 75%'},opacity:1,duration:.6});
+gsap.to('.manifesto-text',{scrollTrigger:{trigger:'#manifesto',start:'top 70%'},opacity:1,duration:1,delay:.1});
+gsap.to('.manifesto-sub',{scrollTrigger:{trigger:'#manifesto',start:'top 65%'},opacity:1,duration:.8,delay:.3});
 
-// MANIFESTO
-gsap.to('.manifesto-label', {
-  scrollTrigger:{ trigger:'#manifesto', start:'top 75%' },
-  opacity:1, duration:.6
-});
-gsap.to('.manifesto-text', {
-  scrollTrigger:{ trigger:'#manifesto', start:'top 70%' },
-  opacity:1, duration:1, delay:.1
-});
-gsap.to('.manifesto-sub', {
-  scrollTrigger:{ trigger:'#manifesto', start:'top 65%' },
-  opacity:1, duration:.8, delay:.3
+// Cards
+gsap.utils.toArray('.what-card').forEach((el,i)=>{
+  gsap.to(el,{scrollTrigger:{trigger:el,start:'top 80%'},opacity:1,y:0,duration:.7,delay:i*.12});
 });
 
-// WHAT CARDS
-gsap.utils.toArray('.what-card').forEach((el, i) => {
-  gsap.to(el, {
-    scrollTrigger:{ trigger:el, start:'top 80%' },
-    opacity:1, y:0, duration:.7, delay: i * .12
-  });
+// Steps
+gsap.utils.toArray('.step-item').forEach((el,i)=>{
+  gsap.to(el,{scrollTrigger:{trigger:el,start:'top 80%'},opacity:1,x:0,duration:.7,delay:i*.15});
+});
+gsap.to('.how-visual',{scrollTrigger:{trigger:'.how-visual',start:'top 80%'},opacity:1,x:0,duration:.9});
+
+// Numbers
+gsap.utils.toArray('.num-card').forEach((el,i)=>{
+  gsap.to(el,{scrollTrigger:{trigger:el,start:'top 85%'},opacity:1,duration:.6,delay:i*.1});
 });
 
-// STEPS
-gsap.utils.toArray('.step-item').forEach((el, i) => {
-  gsap.to(el, {
-    scrollTrigger:{ trigger:el, start:'top 80%' },
-    opacity:1, x:0, duration:.7, delay: i * .15
-  });
-});
+// Mission
+gsap.to('.mission-text',{scrollTrigger:{trigger:'#mission',start:'top 70%'},opacity:1,duration:1});
+gsap.to('.mission-sub',{scrollTrigger:{trigger:'#mission',start:'top 65%'},opacity:1,duration:.8,delay:.2});
+gsap.to('.cta-pair',{scrollTrigger:{trigger:'#mission',start:'top 60%'},opacity:1,duration:.8,delay:.4});
 
-// HOW VISUAL
-gsap.to('.how-visual', {
-  scrollTrigger:{ trigger:'.how-visual', start:'top 80%' },
-  opacity:1, x:0, duration:.9
-});
-
-// NUMBERS
-gsap.utils.toArray('.num-card').forEach((el, i) => {
-  gsap.to(el, {
-    scrollTrigger:{ trigger:el, start:'top 85%' },
-    opacity:1, duration:.6, delay: i * .1
-  });
-});
-
-// MISSION
-gsap.to('.mission-text', {
-  scrollTrigger:{ trigger:'#mission', start:'top 70%' },
-  opacity:1, duration:1
-});
-gsap.to('.mission-sub', {
-  scrollTrigger:{ trigger:'#mission', start:'top 65%' },
-  opacity:1, duration:.8, delay:.2
-});
-gsap.to('.cta-pair', {
-  scrollTrigger:{ trigger:'#mission', start:'top 60%' },
-  opacity:1, duration:.8, delay:.4
-});
-
-// CHAT LOOP
-const chatSeq = [
-  { id:'c1',  delay:400 },
-  { id:'ct1', delay:900,  typing:true, dur:800 },
-  { id:'c2',  delay:1700 },
-  { id:'c3',  delay:2900 },
-  { id:'ct2', delay:3400, typing:true, dur:700 },
-  { id:'c4',  delay:4100 },
+// ── CHAT DEMO (card) ──
+const chatSeq=[
+  {id:'c1',delay:400},{id:'ct1',delay:900,typing:true,dur:800},
+  {id:'c2',delay:1700},{id:'c3',delay:2900},
+  {id:'ct2',delay:3400,typing:true,dur:700},{id:'c4',delay:4100},
 ];
-
-function runChat() {
-  chatSeq.forEach(s => {
-    setTimeout(() => {
-      const el = document.getElementById(s.id);
-      if (!el) return;
+function runChat(){
+  chatSeq.forEach(s=>{
+    setTimeout(()=>{
+      const el=document.getElementById(s.id);if(!el)return;
       el.classList.add('show');
-      if (s.typing) setTimeout(() => el.classList.remove('show'), s.dur);
-    }, s.delay);
+      if(s.typing)setTimeout(()=>el.classList.remove('show'),s.dur);
+    },s.delay);
   });
-  setTimeout(() => {
-    chatSeq.forEach(s => {
-      const el = document.getElementById(s.id);
-      if (el) el.classList.remove('show');
-    });
-    setTimeout(runChat, 600);
-  }, 7000);
+  setTimeout(()=>{
+    chatSeq.forEach(s=>{const el=document.getElementById(s.id);if(el)el.classList.remove('show')});
+    setTimeout(runChat,600);
+  },7000);
 }
 runChat();
+
+// ── HERO WHATSAPP ANIMATION (robô) ──
+const heroSeq=[
+  {id:'wm1',delay:600},
+  {id:'wt1',delay:1200,typing:true,dur:900},
+  {id:'wm2',delay:2100},
+  {id:'wm3',delay:3400},
+  {id:'wt2',delay:4000,typing:true,dur:700},
+  {id:'wm4',delay:4700},
+];
+function runHeroChat(){
+  heroSeq.forEach(s=>{
+    setTimeout(()=>{
+      const el=document.getElementById(s.id);if(!el)return;
+      el.classList.add('show');
+      if(s.typing)setTimeout(()=>el.classList.remove('show'),s.dur);
+    },s.delay);
+  });
+  setTimeout(()=>{
+    heroSeq.forEach(s=>{const el=document.getElementById(s.id);if(el)el.classList.remove('show')});
+    setTimeout(runHeroChat,800);
+  },8000);
+}
+runHeroChat();
 </script>
 </body>
 </html>
