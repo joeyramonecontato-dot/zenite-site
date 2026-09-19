@@ -1,0 +1,46 @@
+{
+  "swarmName": "Zenite-Autonomous-Growth-Swarm",
+  "version": "3.31.0",
+  "activeAgents": [
+    {
+      "id": "hermes-cmo",
+      "role": "Chief Growth Officer & Marketing Director",
+      "status": "active"
+    },
+    {
+      "id": "claude-cto",
+      "role": "Chief Technology Officer & Delivery Lead",
+      "status": "active"
+    }
+  ],
+  "sharedMemory": {
+    "targetNiches": [
+      "Clinicas Odontologicas",
+      "Imobiliarias",
+      "Advocacia"
+    ],
+    "activeCampaigns": [
+      "Prospecção Ativa WhatsApp 24/7",
+      "Reels Motion Neuro Meta"
+    ],
+    "completedTasks": []
+  },
+  "taskQueue": [
+    {
+      "id": "TASK-001",
+      "creator": "hermes-cmo",
+      "assignee": "claude-cto",
+      "title": "Construir Demo Interativa de Bot de WhatsApp para Clínicas Odontológicas",
+      "priority": "HIGH",
+      "status": "PENDING"
+    },
+    {
+      "id": "TASK-002",
+      "creator": "hermes-cmo",
+      "assignee": "hermes-cmo",
+      "title": "Gerar 20 Scripts de Cold Message para Clínicas em Florianópolis",
+      "priority": "HIGH",
+      "status": "PENDING"
+    }
+  ]
+}

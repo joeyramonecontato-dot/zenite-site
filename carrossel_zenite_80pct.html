@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zênite — Carrossel "80% Automatizado"</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+  :root {
+    --bg: #07070F;
+    --bg2: #0c0c1a;
+    --bg3: #111128;
+    --violet: #8B5CF6;
+    --violet-light: #C4B5FD;
+    --violet-dark: #5B21B6;
+    --violet-deepest: #3B0764;
+    --text: #f0f0ff;
+    --muted: #6b6b9a;
+    --green: #25D366;
+    --slide-w: 1080px;
+    --slide-h: 1350px;
+    --scale: 0.55;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1a1a2e;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+  }
+
+  h1 {
+    color: var(--text);
+    font-size: 28px;
+    font-weight: 900;
+    text-align: center;
+    letter-spacing: -0.5px;
+  }
+  h1 span { color: var(--violet); }
+  .subtitle { color: var(--muted); font-size: 14px; text-align: center; margin-top: 8px; }
+
+  .slide-wrapper {
+    position: relative;
+    transform: scale(var(--scale));
+    transform-origin: top center;
+    margin-bottom: calc(var(--slide-h) * (var(--scale) - 1) + 40px);
+  }
+  .slide-label {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--violet-light);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    z-index: 10;
+  }
+
+  .slide {
+    width: var(--slide-w);
+    height: var(--slide-h);
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    border-radius: 0;
+  }
+
+  /* ── SLIDE 1: CAPA ── */
+  .s1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 100px 90px;
+    background: radial-gradient(ellipse at 70% 30%, rgba(139,92,246,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(37,211,102,0.06) 0%, transparent 50%),
+                var(--bg);
+  }
+  .s1 .logo-mark {
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--violet);
+    margin-bottom: 60px;
+  }
+  .s1 .headline {
+    font-size: 72px;
+    font-weight: 900;
+    line-height: 1.04;
+    letter-spacing: -3px;
+    color: var(--text);
+    margin-bottom: 40px;
+  }
+  .s1 .headline em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--violet), var(--violet-light), #e879f9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .s1 .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(139,92,246,0.08);
+    border: 1px solid rgba(139,92,246,0.2);
+    border-radius: 50px;
+    padding: 12px 28px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--violet-light);
+  }
+  .s1 .tag .dot {
+    width: 8px; height: 8px;
+    background: var(--green);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(37,211,102,0.6);
+  }
+  .s1 .corner-art {
+    position: absolute;
+    bottom: 80px;
+    right: 90px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 1px solid rgba(139,92,246,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 72px;
+  }
+  .s1 .corner-art::before {
+    content: '';
+    position: absolute;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    border: 1px solid rgba(139,92,246,0.1);
+  }
+
+  /* ── SLIDE 2: PROBLEMA ── */
+  .s2 {
+    display: flex;
+    flex-direction: column;
+    padding: 100px 90px;
+    background: radial-gradient(ellipse at 30% 20%, rgba(239,68,68,0.06) 0%, transparent 50%),
+                var(--bg);
+  }
+  .s2 .eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #ef4444;
+    margin-bottom: 32px;
+  }
+  .s2 .quote {
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -2px;
+    color: var(--text);
+    margin-bottom: 56px;
+    max-width: 700px;
+  }
+  .s2 .quote em {
+    font-style: normal;
+    color: #ef4444;
+  }
+  .s2 .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+  }
+  .s2 .stat-card {
+    background: var(--bg2);
+    border: 1px solid rgba(239,68,68,0.15);
+    border-radius: 20px;
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .s2 .stat-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+  .s2 .stat-val {
+    font-size: 44px;
+    font-weight: 900;
+    color: #ef4444;
+    letter-spacing: -2px;
+  }
+  .s2 .stat-label {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .s2 .closing {
+    margin-top: 48px;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    font-style: italic;
+    opacity: 0.7;
+  }
+
+  /* ── SLIDE 3: SOLUÇÃO ── */
+  .s3 {
+    display: flex;
+    flex-direction: column;
+    padding: 100px 90px;
+    background: radial-gradient(ellipse at 60% 40%, rgba(139,92,246,0.10) 0%, transparent 50%),
+                var(--bg);
+  }
+  .s3 .eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 28px;
+  }
+  .s3 .title {
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -2px;
+    color: var(--text);
+    margin-bottom: 52px;
+    max-width: 750px;
+  }
+  .s3 .features {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+  .s3 .feat {
+    background: var(--bg2);
+    border: 1px solid rgba(139,92,246,0.12);
+    border-radius: 16px;
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: border-color 0.3s;
+  }
+  .s3 .feat-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--violet-deepest), var(--violet-dark));
+    border: 1px solid rgba(139,92,246,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .s3 .feat-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .s3 .feat-sub {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 4px;
+  }
+  .s3 .quote-box {
+    margin-top: 48px;
+    padding: 28px 32px;
+    background: rgba(139,92,246,0.06);
+    border-left: 3px solid var(--violet);
+    border-radius: 0 12px 12px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--violet-light);
+    font-style: italic;
+  }
+
+  /* ── SLIDE 4: RESULTADOS ── */
+  .s4 {
+    display: flex;
+    flex-direction: column;
+    padding: 100px 90px;
+    background: radial-gradient(ellipse at 50% 50%, rgba(37,211,102,0.06) 0%, transparent 50%),
+                var(--bg);
+  }
+  .s4 .eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--violet);
+    margin-bottom: 28px;
+  }
+  .s4 .title {
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -2px;
+    color: var(--text);
+    margin-bottom: 56px;
+  }
+  .s4 .results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+  }
+  .s4 .result-card {
+    background: var(--bg2);
+    border: 1px solid rgba(139,92,246,0.12);
+    border-radius: 20px;
+    padding: 40px 32px;
+    text-align: center;
+  }
+  .s4 .result-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+  .s4 .result-val {
+    font-size: 52px;
+    font-weight: 900;
+    letter-spacing: -3px;
+    background: linear-gradient(135deg, var(--green), #4ade80);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  .s4 .result-label {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .s4 .source {
+    margin-top: 40px;
+    font-size: 13px;
+    color: var(--muted);
+    opacity: 0.6;
+    font-style: italic;
+  }
+
+  /* ── SLIDE 5: ESCALAÇÃO ── */
+  .s5 {
+    display: flex;
+    flex-direction: column;
+    padding: 100px 90px;
+    background: radial-gradient(ellipse at 40% 30%, rgba(139,92,246,0.10) 0%, transparent 50%),
+                var(--bg);
+  }
+  .s5 .eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--violet-light);
+    margin-bottom: 28px;
+  }
+  .s5 .title {
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -2px;
+    color: var(--text);
+    margin-bottom: 56px;
+    max-width: 750px;
+  }
+  .s5 .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+  }
+  .s5 .flow-row {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+  }
+  .s5 .flow-line {
+    width: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .s5 .flow-dot {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--violet-dark), var(--violet));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 900;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(139,92,246,0.4);
+    flex-shrink: 0;
+    z-index: 2;
+  }
+  .s5 .flow-connector {
+    width: 1px;
+    flex: 1;
+    background: linear-gradient(to bottom, var(--violet), rgba(139,92,246,0.1));
+    margin: 0 auto;
+  }
+  .s5 .flow-content {
+    flex: 1;
+    padding: 6px 0 40px 24px;
+  }
+  .s5 .flow-content h3 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .s5 .flow-content p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .s5 .flow-content .highlight {
+    color: var(--green);
+    font-weight: 700;
+  }
+  .s5 .flow:last-child .flow-connector { display: none; }
+  .s5 .flow:last-child .flow-content { padding-bottom: 0; }
+  .s5 .closing-text {
+    margin-top: 48px;
+    padding: 28px 32px;
+    background: rgba(139,92,246,0.06);
+    border-left: 3px solid var(--violet);
+    border-radius: 0 12px 12px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--violet-light);
+  }
+
+  /* ── SLIDE 6: CTA ── */
+  .s6 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 100px 90px;
+    background: radial-gradient(ellipse at 50% 40%, rgba(139,92,246,0.14) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(37,211,102,0.08) 0%, transparent 40%),
+                var(--bg);
+  }
+  .s6 .gift-icon {
+    font-size: 64px;
+    margin-bottom: 32px;
+  }
+  .s6 .headline {
+    font-size: 56px;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -2px;
+    color: var(--text);
+    margin-bottom: 56px;
+    max-width: 700px;
+  }
+  .s6 .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 640px;
+    margin-bottom: 56px;
+  }
+  .s6 .step {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--bg2);
+    border: 1px solid rgba(139,92,246,0.12);
+    border-radius: 16px;
+    padding: 24px 28px;
+    text-align: left;
+  }
+  .s6 .step-num {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--violet-dark), var(--violet));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 900;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .s6 .step-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .s6 .step-text span {
+    color: var(--green);
+    font-weight: 800;
+  }
+  .s6 .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--green);
+    color: #000;
+    font-weight: 900;
+    font-size: 20px;
+    padding: 22px 48px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 50px rgba(37,211,102,0.4);
+    margin-bottom: 48px;
+    text-decoration: none;
+  }
+  .s6 .brand-footer {
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .s6 .brand-footer strong {
+    background: linear-gradient(135deg, var(--violet), var(--violet-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* ── Separator ── */
+  .slide-sep {
+    width: 80%;
+    max-width: 600px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(139,92,246,0.3), transparent);
+  }
+</style>
+</head>
+<body>
+
+<h1>🎨 Carrossel Instagram — <span>Zênite Soluções</span></h1>
+<p class="subtitle">1080×1350 • Identidade: Midnight Navy + Royal Violet + WhatsApp Green</p>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- SLIDE 1 — CAPA                             -->
+<!-- ════════════════════════════════════════════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">SLIDE 1 — CAPA</div>
+  <div class="slide s1">
+    <div class="logo-mark">ZÊNITE</div>
+    <div class="headline">
+      Como automatizar<br><em>80% do WhatsApp</em><br>sem virar "robô"
+    </div>
+    <div class="tag">
+      <span class="dot"></span>
+      Florianópolis • Case Real
+    </div>
+    <div class="corner-art">🤖</div>
+  </div>
+</div>
+
+<div class="slide-sep"></div>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- SLIDE 2 — O PROBLEMA                       -->
+<!-- ════════════════════════════════════════════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">SLIDE 2 — O PROBLEMA</div>
+  <div class="slide s2">
+    <div class="eyebrow">❌ O Problema</div>
+    <div class="quote">
+      "Meu WhatsApp é um<br><em>buraco negro</em>"
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">📉</div>
+        <div class="stat-val">23→4</div>
+        <div class="stat-label">Leads/dia que<br>recebem resposta</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⏱️</div>
+        <div class="stat-val">37 min</div>
+        <div class="stat-label">Tempo médio<br>de resposta</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🚪</div>
+        <div class="stat-val">42%</div>
+        <div class="stat-label">No-show em<br>agendamentos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">😤</div>
+        <div class="stat-val">100%</div>
+        <div class="stat-label">Equipe exausta<br>e dono apagando incêndio</div>
+      </div>
+    </div>
+    <div class="closing">Som familiar? 🤔</div>
+  </div>
+</div>
+
+<div class="slide-sep"></div>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- SLIDE 3 — A SOLUÇÃO                        -->
+<!-- ════════════════════════════════════════════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">SLIDE 3 — A SOLUÇÃO</div>
+  <div class="slide s3">
+    <div class="eyebrow">✅ A Solução Zênite</div>
+    <div class="title">
+      Bot treinado<br><em style="color:var(--violet);font-style:normal">NO SEU NEGÓCIO</em>
+    </div>
+    <div class="features">
+      <div class="feat">
+        <div class="feat-icon">🧠</div>
+        <div>
+          <div class="feat-text">Base de conhecimento SUA</div>
+          <div class="feat-sub">Regras, FAQs, processos — tudo do seu negócio</div>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">💬</div>
+        <div>
+          <div class="feat-text">Tom de voz DA SUA marca</div>
+          <div class="feat-sub">O cliente acha que tá falando com sua recepção</div>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🔗</div>
+        <div>
+          <div class="feat-text">Integração com suas ferramentas</div>
+          <div class="feat-sub">Calendly, CRM, Pipedrive, Google Calendar</div>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🧑‍💼</div>
+        <div>
+          <div class="feat-text">Escaleração humana com contexto</div>
+          <div class="feat-sub">Bot passa o histórico — nenhum "por favor repita"</div>
+        </div>
+      </div>
+    </div>
+    <div class="quote-box">
+      "O cliente não sabe que é bot.<br>Ele só sabe que foi atendido rápido."
+    </div>
+  </div>
+</div>
+
+<div class="slide-sep"></div>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- SLIDE 4 — OS NÚMEROS                       -->
+<!-- ════════════════════════════════════════════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">SLIDE 4 — RESULTADOS</div>
+  <div class="slide s4">
+    <div class="eyebrow">📊 Resultados em 30 dias</div>
+    <div class="title">
+      Os números<br>falam por si
+    </div>
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="result-icon">⚡</div>
+        <div class="result-val">&lt;1 min</div>
+        <div class="result-label">Tempo de resposta<br><s style="text-decoration-color:#ef4444">37 min</s> → &lt;1 min</div>
+      </div>
+      <div class="result-card">
+        <div class="result-icon">📈</div>
+        <div class="result-val">+340%</div>
+        <div class="result-label">Conversão<br>lead → agendado</div>
+      </div>
+      <div class="result-card">
+        <div class="result-icon">🎯</div>
+        <div class="result-val">11%</div>
+        <div class="result-label">No-show<br><s style="text-decoration-color:#ef4444">42%</s> → 11%</div>
+      </div>
+      <div class="result-card">
+        <div class="result-icon">💰</div>
+        <div class="result-val">180h</div>
+        <div class="result-label">Horas economizadas<br>por mês</div>
+      </div>
+    </div>
+    <div class="source">* Clínica odontológica, Centro de Florianópolis — dados reais</div>
+  </div>
+</div>
+
+<div class="slide-sep"></div>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- SLIDE 5 — O PULO DO GATO                   -->
+<!-- ════════════════════════════════════════════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">SLIDE 5 — O SEGREDO</div>
+  <div class="slide s5">
+    <div class="eyebrow">🧠 O Pulo do Gato</div>
+    <div class="title">
+      Escalação<br>Inteligente
+    </div>
+    <div class="flow">
+      <div class="flow-row">
+        <div class="flow-line">
+          <div class="flow-dot">1</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-content">
+          <h3>🤖 Bot resolve 80%</h3>
+          <p>FAQ, agendamento, triagem, envio de documentos, confirmações, reagendamento</p>
+        </div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-line">
+          <div class="flow-dot">2</div>
+          <div class="flow-connector"></div>
+        </div>
+        <div class="flow-content">
+          <h3>🔄 Caso complexo → Escalação</h3>
+          <p>Bot identifica que precisa de humano e <span class="highlight">transfere com contexto completo</span></p>
+        </div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-line">
+          <div class="flow-dot">3</div>
+        </div>
+        <div class="flow-content">
+          <h3>🧑‍💼 Humano assume SEM repetição</h3>
+          <p>Histórico inteiro da conversa visível. Zero "poderia repetir sua dúvida?"</p>
+        </div>
+      </div>
+    </div>
+    <div class="closing-text">
+      Automação não é substituir humano.<br>
+      É <strong style="color:var(--text)">liberar humano</strong> pro que importa.
+    </div>
+  </div>
+</div>
+
+<div class="slide-sep"></div>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- SLIDE 6 — CTA                              -->
+<!-- ════════════════════════════════════════════ -->
+<div class="slide-wrapper">
+  <div class="slide-label">SLIDE 6 — CTA</div>
+  <div class="slide s6">
+    <div class="gift-icon">🎁</div>
+    <div class="headline">
+      Demo grátis —<br>sem compromisso
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">Clica no link na bio</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Preenche <span>5 perguntas</span> (2 min)</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Recebe o bot no <span>seu WhatsApp</span> em 48h</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text"><span>Testa 7 dias</span>. Gostou? Contrata.</div>
+      </div>
+    </div>
+    <div class="cta-btn">
+      🟢 Abrir WhatsApp da Zênite
+    </div>
+    <div class="brand-footer">
+      <strong>Zênite</strong> — Tecnologia que liberta<br>
+      zênite.digital
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
